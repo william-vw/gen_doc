@@ -1,0 +1,475 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix log:     <http://www.w3.org/2000/10/swap/log#> .
+@prefix in:      <http://n3.w3c.org/builtin/input#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix math:    <http://www.w3.org/2000/10/swap/math#> .
+@prefix list:    <http://www.w3.org/2000/10/swap/list#> .
+
+<http://www.w3.org/2000/10/swap/string#capitalize>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable OR variable" .
+
+math:tanh
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+<http://www.w3.org/2000/10/swap/time#hour>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:time\nobject: $o is intable OR variable" .
+
+<http://www.w3.org/2000/10/swap/graph#member>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is formula OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#endsWith>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+math:acosh
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+<http://www.w3.org/2000/10/swap/graph#length>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is numberable OR variable" .
+
+math:quotient
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s1 $s_2) where $s_i is numberable OR variable\nobject: $o is numberable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#notGreaterThan>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+log:localName
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is stringable OR variable" .
+
+list:last
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any" .
+
+math:asin
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:lessThan
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" .
+
+math:roundedTo
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is numberable, $s_1 is intable\nobject: $o is numberable OR variable" .
+
+math:equalTo
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" .
+
+<http://www.w3.org/2000/10/swap/string#length>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is intable OR variable" .
+
+<http://www.w3.org/2000/10/swap/time#day>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:date\nobject: $o is intable OR variable" .
+
+<http://www.w3.org/2000/10/swap/time#timeZone>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:date OR xsd:time\nobject: $o is intable OR variable" .
+
+list:memberAt
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is list, $s_1 is intable\nobject: $o is any" .
+
+log:uuid
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is any\nobject: $o is string OR variable" .
+
+log:semanticsOrError
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is formula OR literal OR variable" .
+
+math:notEqualTo
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" .
+
+<http://www.w3.org/2000/10/swap/string#lowerCase>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#lessThan>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+list:first
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any" .
+
+math:tan
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:floor
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable" .
+
+math:notGreaterThan
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" .
+
+<http://www.w3.org/2000/10/swap/time#month>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:date\nobject: $o is intable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#contains>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+<http://www.w3.org/2000/10/swap/time#second>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:time\nobject: $o is intable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#matches>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is regex" .
+
+math:degrees
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+<http://www.w3.org/2000/10/swap/string#replaceAll>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1 $s_2) where $s_0 is stringable, ($s_1_1 .. $s_1_n) where $s_1_i is regex, ($s_2_1 .. $s_2_n) where $s_2_i is stringable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#format>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is stringable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#containsRoughly>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+math:asinh
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+log:collectAllIn
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1 $s_2) where $s_0 is variable, $s_1 is formula, $s_2 is list OR variable\nobject: $o is baseIri OR formula OR variable" .
+
+log:skolem
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is any" .
+
+math:difference
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s1 $s_2) where $s_i is numberable OR variable\nobject: $o is numberable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#notContainsRoughly>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+<http://www.w3.org/2000/10/swap/string#scrape>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is stringable, $s_1 is regex\nobject: $o is stringable OR variable" .
+
+math:negation
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:atan
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:absoluteValue
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable" .
+
+math:cosh
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:notLessThan
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" .
+
+list:length
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is intable OR variable" .
+
+log:content
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#substring>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is intable, $s_2 is intable OR variable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#scrapeAll>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is stringable, $s_1 is regex\nobject: $o is list OR variable" .
+
+log:forAllIn
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s1 $s_2) where $s_i is formula\nobject: $o is baseIri OR formula OR variable" .
+
+log:inferences
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is formula OR variable" .
+
+log:nameSpace
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is stringable OR variable" .
+
+math:cos
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:remainder
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is intable, $s_1 is intable\nobject: $o is intable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#notMatches>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is regex" .
+
+<http://www.w3.org/2000/10/swap/string#greaterThan>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+math:sinh
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+log:langlit
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is stringable, $s_1 is stringable\nobject: $o is literal OR variable\nOR\nsubject: ($s_0 $s_1) where $s_0 is variable, $s_1 is variable\nobject: $o is literal\nOR\nsubject: $s is variable\nobject: $o is literal" .
+
+list:sort
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is concrete OR variable" .
+
+<http://www.w3.org/2000/10/swap/time#inSeconds>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime\nobject: $o is intable OR variable\nOR\nsubject: $s is variable\nobject: $o is intable" .
+
+log:equalTo
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is any\nOR\nsubject: $s is any\nobject: $o is concrete" .
+
+<http://www.w3.org/2000/10/swap/string#join>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where ($s_0_1 .. $s_0_n) where $s_0_i is stringable, $s_1 is stringable\nobject: $o is string OR variable" .
+
+math:rounded
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable" .
+
+log:rawType
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is iri OR variable" .
+
+list:member
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any" .
+
+<http://www.w3.org/2000/10/swap/string#concatenation>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is stringable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#startsWith>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+list:in
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is any\nobject: $o is list" .
+
+<http://www.w3.org/2000/10/swap/time#minute>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:time\nobject: $o is intable OR variable" .
+
+list:notMember
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is concrete" .
+
+math:atanh
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:exponentiation
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s1 $s_2) where $s_i is numberable OR variable\nobject: $o is numberable OR variable" .
+
+list:removeDuplicates
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is list OR variable" .
+
+<http://www.w3.org/2000/10/swap/file#listFiles>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is formula OR variable" .
+
+log:uri
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is stringable OR variable\nOR\nsubject: $s is variable\nobject: $o is stringable" .
+
+log:notEqualTo
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is concrete" .
+
+math:sin
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+log:dtlit
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is stringable, $s_1 is iri\nobject: $o is literal OR variable\nOR\nsubject: ($s_0 $s_1) where $s_0 is variable, $s_1 is variable\nobject: $o is literal\nOR\nsubject: $s is variable\nobject: $o is literal" .
+
+<http://www.w3.org/2000/10/swap/string#notEqualIgnoringCase>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+math:greaterThan
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" .
+
+math:sum
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is numberable OR variable" .
+
+math:acos
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+log:semantics
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is formula OR variable" .
+
+math:max
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is numberable OR variable" .
+
+math:product
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is numberable OR variable" .
+
+log:outputString
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+log:includes
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula OR baseIri\nobject: $o is formula OR variable OR baseIri" .
+
+list:remove
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is list, $s_1 is concrete\nobject: $o is list OR variable" .
+
+log:parsedAsN3
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is string\nobject: $o is formula OR variable\nOR\nsubject: $s is variable\nobject: $o is formula" .
+
+list:unique
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is list OR variable" .
+
+<http://www.w3.org/2000/10/swap/graph#difference>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s1 $s_2) where $s_i is formula\nobject: $o is formula OR variable" .
+
+list:append
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is list\nobject: $o is list OR variable" .
+
+<http://www.w3.org/2000/10/swap/crypto#sha>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable OR variable" .
+
+list:removeAt
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1) where $s_0 is list, $s_1 is intable\nobject: $o is list OR variable" .
+
+math:radians
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable\nOR\nsubject: $s is numberable OR variable\nobject: $o is numberable" .
+
+math:min
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is numberable OR variable" .
+
+list:notIn
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: ($o_1 .. $o_n) where $o_i is concrete" .
+
+math:ceiling
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable OR variable" .
+
+log:notIncludes
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula OR baseIri\nobject: $o is formula OR variable OR baseIri" .
+
+list:iterate
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#containsIgnoringCase>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+log:bound
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is any\nobject: $o is xsd:boolean OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#equalIgnoringCase>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+log:hasPrefix
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is xsd:boolean OR variable" .
+
+<http://www.w3.org/2000/10/swap/time#year>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:date\nobject: $o is intable OR variable" .
+
+log:prefix
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable OR variable\nOR\nsubject: $s is variable\nobject: $o is stringable" .
+
+math:logarithm
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s1 $s_2) where $s_i is numberable OR variable\nobject: $o is numberable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#replace>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is regex, $s_2 is stringable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/time#currentTime>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is baseIri\nobject: $o is xsd:dateTime OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#upperCase>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable OR variable" .
+
+<http://www.w3.org/2000/10/swap/string#notLessThan>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" .
+
+<http://www.w3.org/2000/10/swap/time#dayOfWeek>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime OR xsd:date\nobject: $o is intable OR variable" .
+
+log:conclusion
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is formula OR variable" .
+
+log:conjunction
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: ($s_1 .. $s_n) where $s_i is formula\nobject: $o is formula OR variable" .
