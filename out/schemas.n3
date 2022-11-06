@@ -1,0 +1,362 @@
+@prefix :        <http://www.w3.org/2000/10/swap/builtin#> .
+@prefix string:  <http://www.w3.org/2000/10/swap/string#> .
+@prefix log:     <http://www.w3.org/2000/10/swap/log#> .
+@prefix in:      <http://n3.w3c.org/builtin/input#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix list:    <http://www.w3.org/2000/10/swap/list#> .
+@prefix graph:   <http://www.w3.org/2000/10/swap/graph#> .
+@prefix crypto:  <http://www.w3.org/2000/10/swap/crypto#> .
+@prefix file:    <http://www.w3.org/2000/10/swap/file#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix math:    <http://www.w3.org/2000/10/swap/math#> .
+@prefix time:    <http://www.w3.org/2000/10/swap/time#> .
+
+string:capitalize
+    :schema "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+math:tanh
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+time:hour
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" .
+
+graph:member
+    :schema "subject: $s is formula\nobject: $o is $o is formula OR $o is variable" .
+
+string:endsWith
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+math:acosh
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+graph:length
+    :schema "subject: $s is formula\nobject: $o is $o is numberable OR $o is variable" .
+
+math:quotient
+    :schema "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" .
+
+string:notGreaterThan
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+log:localName
+    :schema "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable" .
+
+list:last
+    :schema "subject: $s is list\nobject: $o is any" .
+
+math:asin
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:lessThan
+    :schema "subject: $s is numberable\nobject: $o is numberable" .
+
+math:roundedTo
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is numberable, $s_1 is intable\nobject: $o is $o is numberable OR $o is variable" .
+
+math:equalTo
+    :schema "subject: $s is numberable\nobject: $o is numberable" .
+
+string:length
+    :schema "subject: $s is stringable\nobject: $o is $o is intable OR $o is variable" .
+
+time:day
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" .
+
+time:timeZone
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:date OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" .
+
+list:memberAt
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is list, $s_1 is intable\nobject: $o is any" .
+
+log:uuid
+    :schema "subject: $s is any\nobject: $o is $o is string OR $o is variable" .
+
+log:semanticsOrError
+    :schema "subject: $s is iri\nobject: $o is $o is formula OR $o is literal OR $o is variable" .
+
+math:notEqualTo
+    :schema "subject: $s is numberable\nobject: $o is numberable" .
+
+string:lowerCase
+    :schema "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+string:lessThan
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+list:first
+    :schema "subject: $s is list\nobject: $o is any" .
+
+math:tan
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:floor
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+math:notGreaterThan
+    :schema "subject: $s is numberable\nobject: $o is numberable" .
+
+time:month
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" .
+
+string:contains
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+time:second
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" .
+
+string:matches
+    :schema "subject: $s is stringable\nobject: $o is regex" .
+
+math:degrees
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+string:replaceAll
+    :schema "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is ($s_1_1 .. $s_1_n) where $s_1_i is regex, $s_2 is ($s_2_1 .. $s_2_n) where $s_2_i is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+string:format
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+string:containsRoughly
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+math:asinh
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+log:collectAllIn
+    :schema "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is variable, $s_1 is formula, $s_2 is $s_2 is list OR $s_2 is variable\nobject: $o is $o is baseIri OR $o is formula OR $o is variable" .
+
+log:skolem
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is any" .
+
+math:difference
+    :schema "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" .
+
+string:notContainsRoughly
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+string:scrape
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is regex\nobject: $o is $o is stringable OR $o is variable" .
+
+math:negation
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:atan
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:absoluteValue
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+math:cosh
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:notLessThan
+    :schema "subject: $s is numberable\nobject: $o is numberable" .
+
+list:length
+    :schema "subject: $s is list\nobject: $o is $o is intable OR $o is variable" .
+
+log:content
+    :schema "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable" .
+
+string:substring
+    :schema "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is intable, $s_2 is $s_2 is intable OR $s_2 is variable\nobject: $o is $o is stringable OR $o is variable" .
+
+string:scrapeAll
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is regex\nobject: $o is $o is list OR $o is variable" .
+
+log:forAllIn
+    :schema "subject: $s is ($s1 $s_2) where $s_i is formula\nobject: $o is $o is baseIri OR $o is formula OR $o is variable" .
+
+log:inferences
+    :schema "subject: $s is formula\nobject: $o is $o is formula OR $o is variable" .
+
+log:nameSpace
+    :schema "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable" .
+
+math:cos
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:remainder
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is intable, $s_1 is intable\nobject: $o is $o is intable OR $o is variable" .
+
+string:notMatches
+    :schema "subject: $s is stringable\nobject: $o is regex" .
+
+string:greaterThan
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+math:sinh
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+log:langlit
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is stringable\nobject: $o is $o is literal OR $o is variable\nOR\nsubject: $s is ($s_0 $s_1) where $s_0 is variable, $s_1 is variable\nobject: $o is literal\nOR\nsubject: $s is variable\nobject: $o is literal" .
+
+list:sort
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is $o is ($o_1 .. $o_n) where $o_i is concrete OR $o is variable" .
+
+time:inSeconds
+    :schema "subject: $s is xsd:dateTime\nobject: $o is $o is intable OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is intable" .
+
+log:equalTo
+    :schema "subject: $s is concrete\nobject: $o is any\nOR\nsubject: $s is any\nobject: $o is concrete" .
+
+string:join
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is ($s_0_1 .. $s_0_n) where $s_0_i is stringable, $s_1 is stringable\nobject: $o is $o is string OR $o is variable" .
+
+math:rounded
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+log:rawType
+    :schema "subject: $s is concrete\nobject: $o is $o is iri OR $o is variable" .
+
+list:member
+    :schema "subject: $s is list\nobject: $o is any" .
+
+string:concatenation
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+string:startsWith
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+list:in
+    :schema "subject: $s is any\nobject: $o is list" .
+
+time:minute
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" .
+
+list:notMember
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is concrete" .
+
+math:atanh
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:exponentiation
+    :schema "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" .
+
+list:removeDuplicates
+    :schema "subject: $s is list\nobject: $o is $o is list OR $o is variable" .
+
+file:listFiles
+    :schema "subject: $s is iri\nobject: $o is $o is formula OR $o is variable" .
+
+log:uri
+    :schema "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is stringable" .
+
+log:notEqualTo
+    :schema "subject: $s is concrete\nobject: $o is concrete" .
+
+math:sin
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+log:dtlit
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is iri\nobject: $o is $o is literal OR $o is variable\nOR\nsubject: $s is ($s_0 $s_1) where $s_0 is variable, $s_1 is variable\nobject: $o is literal\nOR\nsubject: $s is variable\nobject: $o is literal" .
+
+string:notEqualIgnoringCase
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+math:greaterThan
+    :schema "subject: $s is numberable\nobject: $o is numberable" .
+
+math:sum
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+math:acos
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+log:semantics
+    :schema "subject: $s is iri\nobject: $o is $o is formula OR $o is variable" .
+
+math:max
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+math:product
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+log:outputString
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+log:includes
+    :schema "subject: $s is $s is formula OR $s is baseIri\nobject: $o is $o is formula OR $o is variable OR $o is baseIri" .
+
+list:remove
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is list, $s_1 is concrete\nobject: $o is $o is list OR $o is variable" .
+
+log:parsedAsN3
+    :schema "subject: $s is string\nobject: $o is $o is formula OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is formula" .
+
+list:unique
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is $o is list OR $o is variable" .
+
+graph:difference
+    :schema "subject: $s is ($s1 $s_2) where $s_i is formula\nobject: $o is $o is formula OR $o is variable" .
+
+list:append
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is list\nobject: $o is $o is list OR $o is variable" .
+
+crypto:sha
+    :schema "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+list:removeAt
+    :schema "subject: $s is ($s_0 $s_1) where $s_0 is list, $s_1 is intable\nobject: $o is $o is list OR $o is variable" .
+
+math:radians
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" .
+
+math:min
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+list:notIn
+    :schema "subject: $s is concrete\nobject: $o is ($o_1 .. $o_n) where $o_i is concrete" .
+
+math:ceiling
+    :schema "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" .
+
+log:notIncludes
+    :schema "subject: $s is $s is formula OR $s is baseIri\nobject: $o is $o is formula OR $o is variable OR $o is baseIri" .
+
+list:iterate
+    :schema "subject: $s is list\nobject: $o is $o is ($o_0 $o_1) where $o_0 is $o_0 is intable OR $o_0 is variable, $o_1 is any OR $o is variable" .
+
+string:containsIgnoringCase
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+log:bound
+    :schema "subject: $s is any\nobject: $o is $o is xsd:boolean OR $o is variable" .
+
+string:equalIgnoringCase
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+log:hasPrefix
+    :schema "subject: $s is stringable\nobject: $o is $o is xsd:boolean OR $o is variable" .
+
+time:year
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" .
+
+log:prefix
+    :schema "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is stringable" .
+
+math:logarithm
+    :schema "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" .
+
+string:replace
+    :schema "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is regex, $s_2 is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+time:currentTime
+    :schema "subject: $s is baseIri\nobject: $o is $o is xsd:dateTime OR $o is variable" .
+
+string:upperCase
+    :schema "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" .
+
+string:notLessThan
+    :schema "subject: $s is stringable\nobject: $o is stringable" .
+
+time:dayOfWeek
+    :schema "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" .
+
+log:conclusion
+    :schema "subject: $s is formula\nobject: $o is $o is formula OR $o is variable" .
+
+log:conjunction
+    :schema "subject: $s is ($s_1 .. $s_n) where $s_i is formula\nobject: $o is $o is formula OR $o is variable" .

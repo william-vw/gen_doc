@@ -1,0 +1,89 @@
+@prefix :        <http://www.w3.org/2000/10/swap/builtin#> .
+@prefix string:  <http://www.w3.org/2000/10/swap/string#> .
+@prefix log:     <http://www.w3.org/2000/10/swap/log#> .
+@prefix in:      <http://n3.w3c.org/builtin/input#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix list:    <http://www.w3.org/2000/10/swap/list#> .
+@prefix graph:   <http://www.w3.org/2000/10/swap/graph#> .
+@prefix crypto:  <http://www.w3.org/2000/10/swap/crypto#> .
+@prefix file:    <http://www.w3.org/2000/10/swap/file#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix math:    <http://www.w3.org/2000/10/swap/math#> .
+@prefix time:    <http://www.w3.org/2000/10/swap/time#> .
+
+
+{	?entry :builtin ?builtin .
+	<> log:notIncludes { ?builtin rdfs:comment ?comment }
+	
+} => {	?builtin :htmlComment "" } .
+
+
+{	?entry :builtin ?builtin .
+	?builtin rdfs:comment ?comment .
+	
+	( ?comment "\\n\\n" "<br />" ) string:replace ?comment2 .
+	
+	( "<h5><p>" ?comment2 "</p></h5>") string:concatenation ?htmlComment .
+	
+} => {	?builtin :htmlComment ?htmlComment } .
+
+
+{	?entry :builtin ?builtin .
+	?builtin :schema ?schema ;
+		:uri ?uri ;
+		:name ?name .
+		
+	( ?schema "\\\\n" "<br />" ) string:replace ?schema2 .
+	( ?schema2 "\\\\t" "&nbsp;&nbsp;&nbsp;&nbsp;" ) string:replace ?schema3 .
+	
+	?builtin :htmlComment ?htmlComment .
+	
+	( 	"<div>" 
+			"<h4>" ?name "</h4>" 
+			"(" ?uri ")" 
+			"<h5>schema</h5>" 
+			"<p>" ?schema3 "</p>" 
+			?htmlComment
+		"</div>" ) 
+			
+			string:concatenation ?builtinHtml
+
+} => { ?builtin :builtinHtml ?builtinHtml } .
+
+
+{	?x :entry ?entry .
+	?entry :namespace ?ns ;
+		:prefix ?prefix .
+		
+	( ?builtin { ?entry :builtin ?builtin } ?builtins ) log:collectAllIn <> .
+	( ?html { ?entry!:builtin :builtinHtml ?html  } ?htmls ) log:collectAllIn <> .
+	
+	?builtins list:length ?htmls!list:length . 
+
+	( ?htmls "\n" ) string:join ?builtinsStr .
+	
+	( "<div>" "<h2>" ?prefix "</h2>" "(" ?ns ")" ?builtinsStr "</div>" )
+		string:concatenation ?entryHtml
+		
+} => {	?entry :entryHtml ?entryHtml } .
+
+
+{	<> log:rawType log:Uri .
+
+	( ?entry { ?x :entry ?entry } ?entries ) log:collectAllIn <> .
+	( ?html { ?x!:entry :entryHtml ?html } ?htmls ) log:collectAllIn <> .
+	
+	?entries list:length ?htmls!list:length . 
+
+	( ?htmls "\n" ) string:join ?entriesStr .
+	
+	( 	"<html>"
+			"<head><link href='style.css' rel='stylesheet' /></head>"
+			"<body>" ?entriesStr "</body>"
+		"</html>" ) 
+			
+			string:concatenation ?docHtml .
+	
+} => { <> :out ?docHtml } .

@@ -1,0 +1,1939 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix log:     <http://www.w3.org/2000/10/swap/log#> .
+@prefix in:      <http://n3.w3c.org/builtin/input#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix math:    <http://www.w3.org/2000/10/swap/math#> .
+@prefix list:    <http://www.w3.org/2000/10/swap/list#> .
+
+<http://www.w3.org/2000/10/swap/genid#4tA2WvJ973RuKTJqFOrl5Q>
+    rdfs:comment """Returns an identifier based on the type of the RDF Resource.
+
+`true` if the type of `$s` is the same as `$o`, or binds the type to `$o`.
+
+`$o` is unbound or one of `log:Formula`, `log:Literal`, `log:List`, `log:Set` or `log:Other`.
+
+Example: `log:semanticsOrError` returns either a formula or a string, and you can check which using `log:rawType`. """ .
+
+<http://www.w3.org/2000/10/swap/genid#wnekBEBm8C0QSzvug9Bybg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#day> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:day" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer day component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#KT66TSl_fiFiUkDlAkeWgw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:notEqualTo ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:notEqualTo" ;
+    rdfs:comment "`true` if and only if the subject is a number which is NOT EQUAL to a object." .
+
+<http://www.w3.org/2000/10/swap/genid#l-YPh7s6s2-LaNQ1DPdbFg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#equalIgnoringCase> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:equalIgnoringCase" ;
+    rdfs:comment """True iff the subject string is the same as object string
+ignoring differences between upper and lower case.""" .
+
+<http://www.w3.org/2000/10/swap/genid#Gc1Rv2JDft7qY0Ja6ICx4Q>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is iri\nobject: $o is $o is literal OR $o is variable\nOR\nsubject: $s is ($s_0 $s_1) where $s_0 is variable, $s_1 is variable\nobject: $o is literal\nOR\nsubject: $s is variable\nobject: $o is literal" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:dtlit ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:dtlit" ;
+    rdfs:comment """Takes a list of a string and an IRI and creates a datatyped literal.
+The subject is a list composed of a string and an IRI, and the object is a datatyped literal with the value `$s_1` and datatype `$s_2`.
+
+`true` if and only if the datatyped literal formed of `$s_0` and `$s_1` equals `$o`.
+
+Example: ``{ (\"2005-03-30T11:00:00\" xsd:dateTime) log:dtlit ?X } => { ?X a :Answer } .` will produce `\"2005-03-30T11:00:00\"^^xsd:dateTime a :Answer .`""" .
+
+<http://www.w3.org/2000/10/swap/genid#bKIJd-OcHE_Ym4k7x4-EgQ>
+    rdfs:comment """Extracts the first member of a list. 
+
+`true` if and only the subject is a list and `$o` is the last member of that list.
+
+`$o` can be calculated as a function of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#tHKCuHiiy0vabCW5sxfWJg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is concrete" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:notMember ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:notMember" .
+
+<http://www.w3.org/2000/10/swap/genid#RMoYWDlQ4ZPapi5rhGDp1A>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:ceiling ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:ceiling" .
+
+<http://www.w3.org/2000/10/swap/genid#CA7KftgaVr1R3fIdTG_tDQ>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the trailing timezone offset
+part, e.g.  \"-05:00\"..
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#KgGxQ7DK__beTjNiicEUhQ>
+    rdfs:comment """True iff the subject string is the same as object string
+ignoring differences between upper and lower case.""" .
+
+<http://www.w3.org/2000/10/swap/genid#w6Yt3OkHpa3AbmMRCqtRMg>
+    rdfs:comment """This allows one to look at the actual string of the URI which identifies this.
+
+(Cwm can get the URI of a resource or get the resource from the URI.)
+This is a level breaker, breaking the rule of not looking inside a
+URI.   Use (eg with  string:match) to replace RDF's old \"aboutEach\"
+functionality. Use to implement the URI spec and protocol specs, etc.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#C3FvEqv829W83m4zh6YaLQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#endsWith> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:endsWith" ;
+    rdfs:comment "True iff the subject string ends with the object string." .
+
+<http://www.w3.org/2000/10/swap/genid#-H9PRrPLX19J0vlSRG08SQ>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#h7g34gRoevIXGZRxBcdOJA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#TDGCqe18hZh5g76PBBfi-w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#F7zHNGXVaqwOryg_MSpbPQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#v1OrcNtadsyQK8x0w4pd8Q> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#Uvdy9Mfj72Idv_U-WLPW9w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#-LmNBy6s0amDKqDjdTHuMg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#6efwF7AgTTnvlT0xAwnX2A> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#JRcOKZBucZnVDgT5YTSYRQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#73NEgOptCQD8QqzpgUGRdA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#tHKCuHiiy0vabCW5sxfWJg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#wOCZIPY0kzJs35vA_v934w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#ahVva0IRo5K4aUSA-6ivow> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#CqtOoPUGT_trREYpPZuVhQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#Ht2Ti50a_JVJeRsHB0kFig> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#CUYlTkIYrLwhmEx45OZ5qQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/list#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "list" .
+
+<http://www.w3.org/2000/10/swap/builtin>
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#RkdvvrDHjcGRMAlwy-p1Ng> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#GB1CxP6qkJXjXZiB4Laxjg> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#862gRm5HHtSyXfFF3aCi6A> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#_zvzASKwwRAanDebMrEs8Q> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#rj7jVcZYutODkAF3iNfXzg> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#VvJRTwT7KcanzlpS4M3CRA> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#-H9PRrPLX19J0vlSRG08SQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#entry>
+        <http://www.w3.org/2000/10/swap/genid#Pd7vzZSjsb3he7BBfq9PDw> .
+
+<http://www.w3.org/2000/10/swap/genid#HJXOm5pRYeJ9qTjr_8BWKA>
+    rdfs:comment """The subject is a pair of numbers. The object
+is calculated by dividing the first number of the pair by the second.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#SWaAAKQQfIP7LbXQKSq0KQ>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the #hyperbolic cosine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#CUYlTkIYrLwhmEx45OZ5qQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is $o is ($o_1 .. $o_n) where $o_i is concrete OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:sort ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:sort" .
+
+<http://www.w3.org/2000/10/swap/genid#SFNzU4RbG2YH1vjSMiVAAw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is regex\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#scrape> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:scrape" ;
+    rdfs:comment """The subject is a list of two strings. The second string is
+a regular expression in the perl, python style.
+It must contain one group (a part in parentheses).  If the first string in the list matches
+the regular expression, then the object is calculated as being the
+part of the first string which matches the group.""" .
+
+<http://www.w3.org/2000/10/swap/genid#1HDuB1aWBHXj40iU4S6Ksw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:lessThan ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:lessThan" ;
+    rdfs:comment "`true` if and only if the subject is a number which is LESS than a object." .
+
+<http://www.w3.org/2000/10/swap/genid#tPfUb2KNS88uDC5XYRHSZA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#containsIgnoringCase> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:containsIgnoringCase" ;
+    rdfs:comment """True iff the subject string contains the object string,
+with the comparison done ignoring the difference between upper case and
+lower case characters.""" .
+
+<http://www.w3.org/2000/10/swap/genid#CLYKRnc6uJskcIkGPvI8hQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#startsWith> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:startsWith" ;
+    rdfs:comment "True iff the subject string starts with the object string." .
+
+<http://www.w3.org/2000/10/swap/genid#VLX96PztLXUrVF5p3u6Tlw>
+    rdfs:comment "The object is calulated as the arc cosine value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#F7zHNGXVaqwOryg_MSpbPQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is list\nobject: $o is $o is list OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:append ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:append" ;
+    rdfs:comment """Concatenates separate lists into a single list. 
+
+`true` if and only if the subject is a list of lists and the concatenation of all those lists is `$o`.
+
+`$o` can be calculated as a function of the subject. 
+
+Example: `( (1 2) (3 4) ) list:append (1 2 3 4).`""" .
+
+<http://www.w3.org/2000/10/swap/genid#wOCZIPY0kzJs35vA_v934w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is ($o_1 .. $o_n) where $o_i is concrete" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:notIn ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:notIn" .
+
+<http://www.w3.org/2000/10/swap/genid#EkMLwxYq4CFdbxEtJg_Lsg>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer month component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#NoBf4QfMCeOc4hstK4sHPw>
+    rdfs:comment "`true` if and only if the subject is a number which is NOT LESS than a object." .
+
+<http://www.w3.org/2000/10/swap/genid#jkOZM3UFqZSkUmetsTUQaw>
+    rdfs:comment "The object is calulated as the arc tangent value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#b6hknUF5WlBp8fzV41H6Jg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:min ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:min" .
+
+<http://www.w3.org/2000/10/swap/genid#wZTlmqlgqTZXv5gIRfz_Hw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:rounded ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:rounded" ;
+    rdfs:comment """The object is calulated as the number with no fractional part that is closest to the subject.
+If there are two such numbers, then the one that is closest to positive infinity is returned.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#v5YvslNRGjNwATK6oj3jTg>
+    rdfs:comment "The object is calulated as the absolute value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#VfbX2_-PeN9-iRMX45INlA>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer day component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#K9iTkGiPtiJGbqlI0UaoUQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:inferences ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:inferences" .
+
+<http://www.w3.org/2000/10/swap/genid#_03-vg2A8hgFPOatTNb6AA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/graph#member> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "graph:member" .
+
+<http://www.w3.org/2000/10/swap/genid#FNNSeeNKbM1QrLm9AW39lA>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the conversion in degrees of the value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#lfVgHkjOsHzlB1fxC87xcw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:floor ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:floor" .
+
+<http://www.w3.org/2000/10/swap/genid#B5Un_GdhZRs32y2NN56bVg>
+    rdfs:comment """Calculates the length of a list.
+
+`true` if and only the subject is a list and `$o` is integer length of that list.
+
+`$o` can be calculated as a function of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#B2JuzVbdOus_7GuQI9chqw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#notEqualIgnoringCase> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:notEqualIgnoringCase" ;
+    rdfs:comment """True iff the subject string is the NOT same as object string
+ignoring differences between upper and lower case.""" .
+
+<http://www.w3.org/2000/10/swap/genid#xmLG5Jla_ilBJMiI4Z1rbA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is variable, $s_1 is formula, $s_2 is $s_2 is list OR $s_2 is variable\nobject: $o is $o is baseIri OR $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:collectAllIn ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:collectAllIn" .
+
+<http://www.w3.org/2000/10/swap/genid#DqbzSP87F28A25OCGEOpdw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:sinh ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:sinh" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the hyperbolic sine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#0HyypbWYnd_DrZ3x4bGJGg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:atanh ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:atanh" .
+
+<http://www.w3.org/2000/10/swap/genid#Fakz3L70iPKZL7upnx-UEg>
+    rdfs:comment """True iff the subject string is the NOT same as object string
+ignoring differences between upper and lower case.""" .
+
+<http://www.w3.org/2000/10/swap/genid#PThbYRyN_YG_YUAT6H5lLQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:content ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:content" ;
+    rdfs:comment """This connects a document and a string that represents it. (Cwm knows how to go get a document in order to evaluate this.)
+Note: the content-type of the information is not given and so must be known or guessed.""" .
+
+<http://www.w3.org/2000/10/swap/genid#nTegO-eNoZUe0NruhGaS_g>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#lessThan> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:lessThan" ;
+    rdfs:comment """True iff the string is less than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#_pEuLcVu8c-Vl-fKKFNrbw>
+    rdfs:comment """The subject string;
+the object is is a regular expression in the perl, python style.
+It is true iff the string does NOT match the regexp.""" .
+
+<http://www.w3.org/2000/10/swap/genid#qh36ApcRaIL0YOtIuiG2tg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#dayOfWeek> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:dayOfWeek" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer the day number within the week, Sunday being 0.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#J7aQg2JLlyqHcxFwDLBwxg>
+    rdfs:comment "True iff the subject string ends with the object string." .
+
+<http://www.w3.org/2000/10/swap/genid#j5wGcIm17eCPNvGDWfTG8w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/graph#length> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "graph:length" .
+
+<http://www.w3.org/2000/10/swap/genid#IK0iGJUC7uQiLZjcwYbd6Q>
+    rdfs:comment "`true` if and only if the subject is a number which is NOT greater than the object." .
+
+<http://www.w3.org/2000/10/swap/genid#wEGKTASU1ywsosI1pTRCQg>
+    rdfs:comment """True iff the string is NOT greater than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#zKd-X3Jm2Q-jowvr1ZRrVA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is intable, $s_1 is intable\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:remainder ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:remainder" ;
+    rdfs:comment """The subject is a pair of integers. The object
+is calculated by dividing the first number of the pair by the second and taking the remainder.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#HSXNXxDPQKrVEQFPXzQTEQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#hour> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:hour" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer hours component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#qKv-Ub7ST2uDXyJ8iyAdOA>
+    rdfs:comment "The object is calulated as the arc sine value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#_zvzASKwwRAanDebMrEs8Q>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#A6ErIit0xTcL-YHYvmVmEA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#l-YPh7s6s2-LaNQ1DPdbFg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#HYVERLJ2_3_zbqtS59bAfA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#jHAmtYhQCC98lsHrlVBoSA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#fHGlrGFmZNzKKbRElTjqcg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#j0lnb978GBuZ67kEpmw3XA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#GQ4KAQSQ0psw6zCBN49a2Q> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#B2JuzVbdOus_7GuQI9chqw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#AqHRys6os_la9t3pW4KJug> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#Zhrd9VeYnssr8c1Xtxun2g> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#-2XaVQ1bjGsBWN6h_F3QBw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#SFNzU4RbG2YH1vjSMiVAAw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#tPfUb2KNS88uDC5XYRHSZA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#MqOxF6PRoZb7JiAWIkDYSQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#g02xwnH5z473mRFbtE6voA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#nTegO-eNoZUe0NruhGaS_g> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#O_dIk0lDUMd3Tze0yA5uVw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#MRCt79FtJmqluI_KeRUXdg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#CLYKRnc6uJskcIkGPvI8hQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#XN9mcujpnaQDA6BiXvZBUw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#J4lllt7DtC2MDMmGXfgHMA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#C3FvEqv829W83m4zh6YaLQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#U-RTRJI_T1gccwvyPnLxcw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#ovNsYjgBSvAncI-kI8byow> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#_Yo31VmTKSE0fOS1srjWXQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#7GV2BCt2FRxrCnYy681Jvg> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/string#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "string" .
+
+<http://www.w3.org/2000/10/swap/genid#lULZEn0_WZg9bizcUil3GQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is xsd:boolean OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:hasPrefix ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:hasPrefix" .
+
+<http://www.w3.org/2000/10/swap/genid#zJdzOWBdKcISu7sAOFrxyw>
+    rdfs:comment """Concatenates the given strings. 
+    
+`true` if and only if the string concatenation of `$s_1, .. $s_n` equals `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#heg3JScwjSGbbC7uS4m49g>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer hours component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#aeQSQcPXp5LNj3w87TlmdA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:tanh ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:tanh" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the hyperbolic tangent value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#RkdvvrDHjcGRMAlwy-p1Ng>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#omXlc3L0Ym8wcUz6E5EBig> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/crypto#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "crypto" .
+
+<http://www.w3.org/2000/10/swap/genid#wZdnWSkouAqljNUdoZA7dg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#second> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:second" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer seconds component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#_qam81jbW676363Tr3uy0g>
+    rdfs:comment """The object formula is NOT a subset of subject.
+
+`true` if and only if `log:includes` is `false`. The converse of log:includes.
+
+Related: see `log:includes`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#N-G0R-eCpyrIDTe0C-BqdA>
+    rdfs:comment """The subject is a pair of integers. The object
+is calculated by dividing the first number of the pair by the second and taking the remainder.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#jozWCmMr4kLN3-Qcvhu8dA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:product ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:product" ;
+    rdfs:comment """The subject is a list of numbers.
+The object is calculated as the arithmentic product of those numbers.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#h7g34gRoevIXGZRxBcdOJA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is $o is list OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:unique ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:unique" .
+
+<http://www.w3.org/2000/10/swap/genid#dxXzIeFEdYBR-P10bCZ0Rw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:asinh ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:asinh" .
+
+<http://www.w3.org/2000/10/swap/genid#bcMrhe0LZXvp4ww29IUA4g>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is concrete\nobject: $o is any" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:skolem ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:skolem" ;
+    rdfs:comment "Built-in to generate a Skolem IRI object which is a function of the arguments in the subject list" .
+
+<http://www.w3.org/2000/10/swap/genid#1nS2SYcKoNlF51yDNGMdVQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:max ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:max" .
+
+<http://www.w3.org/2000/10/swap/genid#fkEpYN9QKvCk6iCXuTnDTA>
+    rdfs:comment """The subject is a string;
+the object is is a regular expression in the perl, python style.
+It is true iff the string matches the regexp.""" .
+
+<http://www.w3.org/2000/10/swap/genid#DNHP6LqweQXyhO6UCeWjIg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is concrete" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:notEqualTo ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:notEqualTo" ;
+    rdfs:comment """Determines if two RDF resources are not the same.
+
+`true` if and only if `$s` and `$o` are not the same RDF node (symbol or literal).""" .
+
+<http://www.w3.org/2000/10/swap/genid#CqtOoPUGT_trREYpPZuVhQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is $o is ($o_0 $o_1) where $o_0 is $o_0 is intable OR $o_0 is variable, $o_1 is any OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:iterate ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:iterate" ;
+    rdfs:comment """Iterates over index/value pairs of the subject list.
+Gets the matching pair of list index and list value for every member of the subject.
+If the object is a variable, it will create a solution for each member of the subject list.
+If any member of the object list is a variable, it will create a solution for all matching
+members of the subject list.
+
+If the object is ground and the entry at the specified index matches the specified value, 
+it evaluates to `true`; otherwise, `false`.
+
+Example: `( 1 2 3 ) list:iterate ($i $v).`""" .
+
+<http://www.w3.org/2000/10/swap/genid#0_9Df1aHEPG7OqG8Jnm7Vg>
+    rdfs:comment "The object is a SHA-1 hash of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#a3JHGnW_rs15T7YklhSmlQ>
+    rdfs:comment """Takes a list of two strings and creates a language-tagged literal.
+The subject is a list composed of two strings, and the object is a language-tagged literal with the value `$s_1` and language `$s_2`.
+
+`true` if and only if the language-tagged literal formed of `$s_1` and `$s_2` equals `$s_3`.
+
+`$s_2` should be a string in the form of a [BCP47](https://tools.ietf.org/html/bcp47) language tag.
+
+Example: `{ (\"hello\" \"en\") log:langlit ?X } => { ?X a :Answer } .` will produce `\"hello\"^^en a :Answer .`""" .
+
+<http://www.w3.org/2000/10/swap/genid#bGjPJrETnWxIf90u5w4NVQ>
+    rdfs:comment "`true` if and only if the subject is a number which is LESS than a object." .
+
+<http://www.w3.org/2000/10/swap/genid#oQKLpidykyCh2HBGU9PMPw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is stringable\nobject: $o is $o is literal OR $o is variable\nOR\nsubject: $s is ($s_0 $s_1) where $s_0 is variable, $s_1 is variable\nobject: $o is literal\nOR\nsubject: $s is variable\nobject: $o is literal" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:langlit ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:langlit" ;
+    rdfs:comment """Takes a list of two strings and creates a language-tagged literal.
+The subject is a list composed of two strings, and the object is a language-tagged literal with the value `$s_1` and language `$s_2`.
+
+`true` if and only if the language-tagged literal formed of `$s_1` and `$s_2` equals `$s_3`.
+
+`$s_2` should be a string in the form of a [BCP47](https://tools.ietf.org/html/bcp47) language tag.
+
+Example: `{ (\"hello\" \"en\") log:langlit ?X } => { ?X a :Answer } .` will produce `\"hello\"^^en a :Answer .`""" .
+
+<http://www.w3.org/2000/10/swap/genid#gryc8OEoOD9C1QTWVTknuA>
+    rdfs:comment """This connects a document and either the formula it parses to, or an error message explaining what went wrong with trying.
+Related: see `log:semantics`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#HTTviTgpAqZ5iMpCBlFH_Q>
+    rdfs:comment """Gets the member of a list at a given position (where the position of the first element is 1).
+
+`true` if and only if `$s_0` has an element at position `$s_1`, and if that element and `$o` can unify.
+
+Note that if `$s_1` is a variable, this builtin may bind it to more than one value (e.g. `((“A” “B” “A”) ?i) list:memberAt \"A\"`).
+
+In case of a negative integer, the index will count backwards from the length of the list.""" .
+
+<http://www.w3.org/2000/10/swap/genid#2KgWCjNZ4drToVaW7o4q8Q>
+    rdfs:comment """The subject is a list of two strings. The second string is
+a regular expression in the perl, python style.
+It must contain one group (a part in parentheses).  If the first string in the list matches
+the regular expression, then the object is calculated as being the
+part of the first string which matches the group.""" .
+
+<http://www.w3.org/2000/10/swap/genid#FYo1N8J6M2YCwpblZ7cDpg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:sin ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:sin" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the sine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#6efwF7AgTTnvlT0xAwnX2A>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:member ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:member" ;
+    rdfs:comment """Determines if an object is a member of the subject list or binds every member of the subject list to the object.
+
+`true` if and only `$s` is a list and `o` is in that list.
+
+`$o` can be calculated from `$s`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#GQ4KAQSQ0psw6zCBN49a2Q>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#upperCase> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:upperCase" .
+
+<http://www.w3.org/2000/10/swap/genid#Fr1uyUbvN6vpQaq02TH4tw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:notLessThan ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:notLessThan" ;
+    rdfs:comment "`true` if and only if the subject is a number which is NOT LESS than a object." .
+
+<http://www.w3.org/2000/10/swap/genid#JRcOKZBucZnVDgT5YTSYRQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is list, $s_1 is intable\nobject: $o is $o is list OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:removeAt ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:removeAt" .
+
+<http://www.w3.org/2000/10/swap/genid#_4slCs0jW3oAcaZtwpwujg>
+    rdfs:comment """The subject is a list, whose first member is a format string,
+and whose remaining members are arguments to the format string.
+The formating string is in the style of python's % operator,
+very similar to C's sprintf().
+The object is calculated from the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#9V-A19vDc67qHiOrq2i-Bg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#minute> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:minute" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer minutes component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#qFDWGiJJolbBcwH0CQuMiw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is formula OR $o is literal OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:semanticsOrError ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:semanticsOrError" ;
+    rdfs:comment """This connects a document and either the formula it parses to, or an error message explaining what went wrong with trying.
+Related: see `log:semantics`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#VYNgDv6zVgQ_T82cglrGYg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is formula OR $s is baseIri\nobject: $o is $o is formula OR $o is variable OR $o is baseIri" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:notIncludes ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:notIncludes" ;
+    rdfs:comment """The object formula is NOT a subset of subject.
+
+`true` if and only if `log:includes` is `false`. The converse of log:includes.
+
+Related: see `log:includes`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#R2u7-X0NBAxKDtLeBZa68Q>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#year> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:year" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer year component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#QotAPMkDWgB5hF4VVqMn_g>
+    rdfs:comment "The subject or object is calculated to be the negation of the other." .
+
+<http://www.w3.org/2000/10/swap/genid#G9Qa8jmfmCzC-dXb3f0ODg>
+    rdfs:comment """True iff the string is NOT less than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#b4uQrCVbb7SBO-EEhtF-TQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:cosh ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:cosh" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the #hyperbolic cosine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#9RSgK5k-pD9txq9urmZ8VQ>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the hyperbolic sine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#U-RTRJI_T1gccwvyPnLxcw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#concatenation> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:concatenation" ;
+    rdfs:comment """Concatenates the given strings. 
+    
+`true` if and only if the string concatenation of `$s_1, .. $s_n` equals `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#Q-LLPRZGdO0_Q4lVOJD2PA>
+    rdfs:comment """Iterates over index/value pairs of the subject list.
+Gets the matching pair of list index and list value for every member of the subject.
+If the object is a variable, it will create a solution for each member of the subject list.
+If any member of the object list is a variable, it will create a solution for all matching
+members of the subject list.
+
+If the object is ground and the entry at the specified index matches the specified value, 
+it evaluates to `true`; otherwise, `false`.
+
+Example: `( 1 2 3 ) list:iterate ($i $v).`""" .
+
+<http://www.w3.org/2000/10/swap/genid#XIxYYKusOV4rAblBKzQ4hA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is any\nobject: $o is $o is string OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:uuid ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:uuid" .
+
+<http://www.w3.org/2000/10/swap/genid#eYXCp8PUZ3B0_Nr_TL_jpg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is formula OR $s is baseIri\nobject: $o is $o is formula OR $o is variable OR $o is baseIri" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:includes ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:includes" ;
+    rdfs:comment """The subject formula includes the object formula.
+
+`true` if and only if `s` includes `$o` if there exists some substitution which when applied to `$o` creates a formula B' such that for every statement in B' is also in `$s`, every variable universally (or existentially) quantified in B' is quantified in the same way in `$s`. 
+
+Variable substitution is applied recursively to nested compound terms such as formulae, lists and sets.
+
+Note: you can use this to peer inside nested formulae.""" .
+
+<http://www.w3.org/2000/10/swap/genid#M7Dwi5Vkt_x_0V6M7Dta4A>
+    rdfs:comment """Extracts the first member of a list. 
+
+`true` if and only the subject is a list and `$o` is the first member of that list.
+
+`$o` can be calculated as a function of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#TL1dB0564hdyQtTuNF5z1g>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s1 $s_2) where $s_i is formula\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/graph#difference> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "graph:difference" .
+
+<http://www.w3.org/2000/10/swap/genid#pX2AEGmwxslW_CuOFe16jw>
+    rdfs:comment """Removes the second component of the subject list from the first component of that list.
+
+`true` if and only if the subject is a list of two lists `$s_1` and `$s_2`, `$s_2` is a subset of `$s_1` and `$o` is a list composed of the members of the `$s_1` with all members of `$s_2` removed, matching left to right.
+
+`$o` can be calculated as a function of the subject.
+
+Example: `( (1 2 3 4) (2 3) ) list:remove (1 4).`""" .
+
+<http://www.w3.org/2000/10/swap/genid#AqHRys6os_la9t3pW4KJug>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#greaterThan> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:greaterThan" ;
+    rdfs:comment """True iff the string is greater than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#7GV2BCt2FRxrCnYy681Jvg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is stringable, $s_1 is regex\nobject: $o is $o is list OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#scrapeAll> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:scrapeAll" .
+
+<http://www.w3.org/2000/10/swap/genid#Uvdy9Mfj72Idv_U-WLPW9w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:length ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:length" ;
+    rdfs:comment """Calculates the length of a list.
+
+`true` if and only the subject is a list and `$o` is integer length of that list.
+
+`$o` can be calculated as a function of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#-2XaVQ1bjGsBWN6h_F3QBw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#notLessThan> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:notLessThan" ;
+    rdfs:comment """True iff the string is NOT less than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#gkGln6qIT0QlAg0spKH1oA>
+    rdfs:comment """The object is calulated as the number with no fractional part that is closest to the subject.
+If there are two such numbers, then the one that is closest to positive infinity is returned.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#gpMYkhoePpe9ngwuOEuKow>
+    rdfs:comment """
+`true` if and only if the $s is a `xsd:dateTime` and the $o is the integer number of seconds
+since the beginning of the era on a given system.  Don't assume a particular value, always test for it.
+
+$o can be calculated as a function of $s.
+
+Cwm implements this as a bidirectional function: you can calculate the
+ISO date from the seconds since the beginning of the era, or vice-versa.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#QCQ7Eh-p0UeQWRmIY2UyWg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is formula\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:conclusion ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:conclusion" ;
+    rdfs:comment """All possible conclusions which can be drawn from a formula.
+
+`true` if and only if `$o` is the set of conclusions which can be drawn from `$s`, by successively applying any rules it contains to the data it contains.
+Note: this is equivalent to cwm's \"--think\" command line function. It does use built-ins, so it may for example indirectly invoke other documents, validate signatures, etc.""" .
+
+<http://www.w3.org/2000/10/swap/genid#HtZHiDa4FwaRYJNTRbh5Og>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer minutes component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#fzEiD4LAB8qA6bZjW3J90A>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is numberable, $s_1 is intable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:roundedTo ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:roundedTo" .
+
+<http://www.w3.org/2000/10/swap/genid#Ht2Ti50a_JVJeRsHB0kFig>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:last ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:last" ;
+    rdfs:comment """Extracts the first member of a list. 
+
+`true` if and only the subject is a list and `$o` is the last member of that list.
+
+`$o` can be calculated as a function of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#j0lnb978GBuZ67kEpmw3XA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is ($s_0_1 .. $s_0_n) where $s_0_i is stringable, $s_1 is stringable\nobject: $o is $o is string OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#join> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:join" .
+
+<http://www.w3.org/2000/10/swap/genid#A6ErIit0xTcL-YHYvmVmEA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#lowerCase> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:lowerCase" .
+
+<http://www.w3.org/2000/10/swap/genid#EHNbcEWymhg0CT6UTZKqMg>
+    rdfs:comment "True iff the subject string starts with the object string." .
+
+<http://www.w3.org/2000/10/swap/genid#TDGCqe18hZh5g76PBBfi-w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is $o is list OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:removeDuplicates ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:removeDuplicates" .
+
+<http://www.w3.org/2000/10/swap/genid#ovNsYjgBSvAncI-kI8byow>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is regex" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#matches> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:matches" ;
+    rdfs:comment """The subject is a string;
+the object is is a regular expression in the perl, python style.
+It is true iff the string matches the regexp.""" .
+
+<http://www.w3.org/2000/10/swap/genid#7tMPa6627jeAMznGqaY0XQ>
+    rdfs:comment """The subject is a pair of numbers. The object
+is calculated by subtracting the second number of the pair from the first.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#QNPJhSNe6u6rOsVTccKqsA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:asin ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:asin" ;
+    rdfs:comment "The object is calulated as the arc sine value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#hXGmLGKWU46EJIf-YcDDag>
+    rdfs:comment "`true` if and only if the subject is a number which is NOT EQUAL to a object." .
+
+<http://www.w3.org/2000/10/swap/genid#eTeGMQfp0SuTqclxUv8-WA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:exponentiation ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:exponentiation" ;
+    rdfs:comment """The subject is a pair of numbers. The object
+is calculated by raising the first number of the power of the second.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#SPaGc3LQVvPNLqrd3KsutA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:uri ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:uri" ;
+    rdfs:comment """This allows one to look at the actual string of the URI which identifies this.
+
+(Cwm can get the URI of a resource or get the resource from the URI.)
+This is a level breaker, breaking the rule of not looking inside a
+URI.   Use (eg with  string:match) to replace RDF's old \"aboutEach\"
+functionality. Use to implement the URI spec and protocol specs, etc.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#Zhrd9VeYnssr8c1Xtxun2g>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#notContainsRoughly> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:notContainsRoughly" .
+
+<http://www.w3.org/2000/10/swap/genid#HY4PDc9DuA1MQ6iWm_mhsw>
+    rdfs:comment """The subject string, parsed as N3, gives this formula.
+
+`true` if and only if `$s`, parsed as N3, gives `$o`.
+
+`$s` should be a syntactically valid string in N3 format.
+
+Related: see `log:n3String`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#RuY0LkhacyTfhOAsFxbqPg>
+    rdfs:comment "True iff the subject string contains the object string." .
+
+<http://www.w3.org/2000/10/swap/genid#_Yo31VmTKSE0fOS1srjWXQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#capitalize> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:capitalize" .
+
+<http://www.w3.org/2000/10/swap/genid#rhxWaXAbJXCJD_px5Un7sA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:notGreaterThan ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:notGreaterThan" ;
+    rdfs:comment "`true` if and only if the subject is a number which is NOT greater than the object." .
+
+<http://www.w3.org/2000/10/swap/genid#QelUZmW8x56A328YIRUPQw>
+    rdfs:comment """True iff the string is less than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#73NEgOptCQD8QqzpgUGRdA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is list\nobject: $o is any" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:first ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:first" ;
+    rdfs:comment """Extracts the first member of a list. 
+
+`true` if and only the subject is a list and `$o` is the first member of that list.
+
+`$o` can be calculated as a function of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#zHEozZrQx-eJXiWHlSrrrQ>
+    rdfs:comment """The subject is a list of numbers.
+The object is calculated as the arithmentic product of those numbers.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#XN9mcujpnaQDA6BiXvZBUw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#notGreaterThan> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:notGreaterThan" ;
+    rdfs:comment """True iff the string is NOT greater than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#j7Xi7QGbOEqlJaVGlaWmBA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:semantics ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:semantics" ;
+    rdfs:comment """The log:semantics of a document is the formula achieved by parsing representation of the document.
+For a document in Notation3, `log:semantics` is the `log:parsedAsN3` of the `log:content` of the document.
+For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 `log:Formula`).
+Evaluates to `false` if an unrecognized document format is retrieved.
+Aside: Philosophers will be distracted here into worrying about the meaning of meaning. At least we didn't call this function \"meaning\"! 
+In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
+Related: see `log:parsedAsN3` and `log:content`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#B0gAMYGScD0X1OStHj6GBA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:absoluteValue ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:absoluteValue" ;
+    rdfs:comment "The object is calulated as the absolute value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#OMHIf4i7sJd6bURfnAQDRw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:localName ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:localName" .
+
+<http://www.w3.org/2000/10/swap/genid#rFh5MPx_Ea0syyTjdl5ZTg>
+    rdfs:comment """Determines if an subject is a member of the object list or binds every member of the object list to the subject.
+
+`true` if and only `$o` is a list and `$s` is in that list.
+
+`$s` can be calculated from `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#zCqlc-Uu475K6RRxWXuX8g>
+    rdfs:comment "Built-in to generate a Skolem IRI object which is a function of the arguments in the subject list" .
+
+<http://www.w3.org/2000/10/swap/genid#sz_aau1NeSfDvrG_WDLFXQ>
+    rdfs:comment """True iff the string is greater than the object
+when ordered according to Unicode(tm) code order.""" .
+
+<http://www.w3.org/2000/10/swap/genid#rj7jVcZYutODkAF3iNfXzg>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#wnekBEBm8C0QSzvug9Bybg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#qh36ApcRaIL0YOtIuiG2tg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#L4i3ECu8uVIf728sREaL0g> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#-5NgByNlH033k5p9jmzK4w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#vqKCm5t7hdEjsoMwzoSIfw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#HSXNXxDPQKrVEQFPXzQTEQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#9NlRy4sNMhK6ASkh65Iqhw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#wZdnWSkouAqljNUdoZA7dg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#R2u7-X0NBAxKDtLeBZa68Q> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#9V-A19vDc67qHiOrq2i-Bg> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/time#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "time" .
+
+<http://www.w3.org/2000/10/swap/genid#8o--aqBp7f4XyRQFXx8MHw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is numberable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:sum ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:sum" ;
+    rdfs:comment """Performs addition of numbers. 
+
+`true` if and only if the arithmetic sum of `$s_1, .. $s_n` equals `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#ZDI-aWZ2ddC12aQXrseRyA>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer year component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#-boHvDhVywjhvS5GZLwUIA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:outputString ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:outputString" ;
+    rdfs:comment """The subject is a key and the object is a string,
+where the strings are to be output in the order of the keys.
+See cwm --strings in cwm --help.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#ub7ApfMHY8KnDN6NlOVwMA>
+    rdfs:comment """This connects a document and a string that represents it. (Cwm knows how to go get a document in order to evaluate this.)
+Note: the content-type of the information is not given and so must be known or guessed.""" .
+
+<http://www.w3.org/2000/10/swap/genid#iSy6wOtl9KHVnNA__GWfSw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/file#listFiles> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "file:listFiles" .
+
+<http://www.w3.org/2000/10/swap/genid#9NlRy4sNMhK6ASkh65Iqhw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:date OR $s is xsd:time\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#timeZone> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:timeZone" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the trailing timezone offset
+part, e.g.  \"-05:00\"..
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#fHGlrGFmZNzKKbRElTjqcg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is ($s_1_1 .. $s_1_n) where $s_1_i is regex, $s_2 is ($s_2_1 .. $s_2_n) where $s_2_i is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#replaceAll> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:replaceAll" .
+
+<http://www.w3.org/2000/10/swap/genid#8BIPCbNrtsBQxn3nrGvEXA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:acos ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:acos" ;
+    rdfs:comment "The object is calulated as the arc cosine value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#XRL_ejQaGr6XgT-TDKYwiQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:radians ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:radians" .
+
+<http://www.w3.org/2000/10/swap/genid#NnkE92XoKT7DMpGObBBPBg>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the cosine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#Mez7YZW4pdiUoUncaQNpuA>
+    rdfs:comment """Performs addition of numbers. 
+
+`true` if and only if the arithmetic sum of `$s_1, .. $s_n` equals `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#AjJe-1DYN1KYRzLNx-Smdg>
+    rdfs:comment "`true` if and only if the subject is a number which is greater than the object." .
+
+<http://www.w3.org/2000/10/swap/genid#ahVva0IRo5K4aUSA-6ivow>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is list, $s_1 is intable\nobject: $o is any" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:memberAt ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:memberAt" ;
+    rdfs:comment """Gets the member of a list at a given position (where the position of the first element is 1).
+
+`true` if and only if `$s_0` has an element at position `$s_1`, and if that element and `$o` can unify.
+
+Note that if `$s_1` is a variable, this builtin may bind it to more than one value (e.g. `((“A” “B” “A”) ?i) list:memberAt \"A\"`).
+
+In case of a negative integer, the index will count backwards from the length of the list.""" .
+
+<http://www.w3.org/2000/10/swap/genid#MRCt79FtJmqluI_KeRUXdg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is regex" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#notMatches> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:notMatches" ;
+    rdfs:comment """The subject string;
+the object is is a regular expression in the perl, python style.
+It is true iff the string does NOT match the regexp.""" .
+
+<http://www.w3.org/2000/10/swap/genid#bknLvEtzsDeQLqBkBeTdfw>
+    rdfs:comment """True iff the subject string contains the object string,
+with the comparison done ignoring the difference between upper case and
+lower case characters.""" .
+
+<http://www.w3.org/2000/10/swap/genid#Pd7vzZSjsb3he7BBfq9PDw>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#B0gAMYGScD0X1OStHj6GBA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#DqbzSP87F28A25OCGEOpdw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#b4uQrCVbb7SBO-EEhtF-TQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#X3DRUobI28UR7dKaKx9XnQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#1HDuB1aWBHXj40iU4S6Ksw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#fzEiD4LAB8qA6bZjW3J90A> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#OVKLQribeI0YXjVsde-Ccw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#rhxWaXAbJXCJD_px5Un7sA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#eTeGMQfp0SuTqclxUv8-WA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#lfVgHkjOsHzlB1fxC87xcw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#3qeaKyk3hdITjZuSh9LwGQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#wZTlmqlgqTZXv5gIRfz_Hw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#8BIPCbNrtsBQxn3nrGvEXA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#DFFdEreDZ7YdoimRzhyLNg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#RMoYWDlQ4ZPapi5rhGDp1A> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#Fr1uyUbvN6vpQaq02TH4tw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#KT66TSl_fiFiUkDlAkeWgw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#0HyypbWYnd_DrZ3x4bGJGg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#8o--aqBp7f4XyRQFXx8MHw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#QNPJhSNe6u6rOsVTccKqsA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#JqZGBXmqyEsUPadMwOjmaA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#jozWCmMr4kLN3-Qcvhu8dA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#KfGln6OjvQAVae_60B0RLw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#XBK8IHZu8KiocifagkKubw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#rLaZexJunFQM7HFr8LsAaQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#1nS2SYcKoNlF51yDNGMdVQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#FYo1N8J6M2YCwpblZ7cDpg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#zKd-X3Jm2Q-jowvr1ZRrVA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#dkqjyrS_7VIbr-mYbqp-hA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#b6hknUF5WlBp8fzV41H6Jg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#XRL_ejQaGr6XgT-TDKYwiQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#dxXzIeFEdYBR-P10bCZ0Rw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#RrVc8x4fUBGX61MTZpR2MQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#aeQSQcPXp5LNj3w87TlmdA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#iexfFxcwm5_wSI5TIobUJg> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/math#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "math" .
+
+<http://www.w3.org/2000/10/swap/genid#MqOxF6PRoZb7JiAWIkDYSQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#format> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:format" ;
+    rdfs:comment """The subject is a list, whose first member is a format string,
+and whose remaining members are arguments to the format string.
+The formating string is in the style of python's % operator,
+very similar to C's sprintf().
+The object is calculated from the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#iyvdt8t14WqGDCdkzRb-_Q>
+    rdfs:comment """The subject formula includes the object formula.
+
+`true` if and only if `s` includes `$o` if there exists some substitution which when applied to `$o` creates a formula B' such that for every statement in B' is also in `$s`, every variable universally (or existentially) quantified in B' is quantified in the same way in `$s`. 
+
+Variable substitution is applied recursively to nested compound terms such as formulae, lists and sets.
+
+Note: you can use this to peer inside nested formulae.""" .
+
+<http://www.w3.org/2000/10/swap/genid#104hJ8KuqIWRhb2xaCmJgw>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the tangent value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#vqKCm5t7hdEjsoMwzoSIfw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is xsd:dateTime\nobject: $o is $o is intable OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is intable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#inSeconds> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:inSeconds" ;
+    rdfs:comment """
+`true` if and only if the $s is a `xsd:dateTime` and the $o is the integer number of seconds
+since the beginning of the era on a given system.  Don't assume a particular value, always test for it.
+
+$o can be calculated as a function of $s.
+
+Cwm implements this as a bidirectional function: you can calculate the
+ISO date from the seconds since the beginning of the era, or vice-versa.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#O7Bkh_wqDc2u-UHU05cJlQ>
+    rdfs:comment """Concatenates separate lists into a single list. 
+
+`true` if and only if the subject is a list of lists and the concatenation of all those lists is `$o`.
+
+`$o` can be calculated as a function of the subject. 
+
+Example: `( (1 2) (3 4) ) list:append (1 2 3 4).`""" .
+
+<http://www.w3.org/2000/10/swap/genid#HYVERLJ2_3_zbqtS59bAfA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#containsRoughly> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:containsRoughly" .
+
+<http://www.w3.org/2000/10/swap/genid#qqXvzvTezqs6W5q8OieM5w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is any\nOR\nsubject: $s is any\nobject: $o is concrete" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:equalTo ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:equalTo" ;
+    rdfs:comment """Determines if two RDF resources are the same.
+
+`true` if and only if `$s` and `$o` are the same RDF node (symbol or literal).
+
+Not to be confused with owl:sameAs.""" .
+
+<http://www.w3.org/2000/10/swap/genid#omXlc3L0Ym8wcUz6E5EBig>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/crypto#sha> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "crypto:sha" ;
+    rdfs:comment "The object is a SHA-1 hash of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#jHAmtYhQCC98lsHrlVBoSA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is intable, $s_2 is $s_2 is intable OR $s_2 is variable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#substring> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:substring" .
+
+<http://www.w3.org/2000/10/swap/genid#RUbVCKpvdp1cV0MBXhDkHA>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer the day number within the week, Sunday being 0.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#xMuUZCugMEwXKvinutQKJg>
+    rdfs:comment """Takes a list of a string and an IRI and creates a datatyped literal.
+The subject is a list composed of a string and an IRI, and the object is a datatyped literal with the value `$s_1` and datatype `$s_2`.
+
+`true` if and only if the datatyped literal formed of `$s_0` and `$s_1` equals `$o`.
+
+Example: ``{ (\"2005-03-30T11:00:00\" xsd:dateTime) log:dtlit ?X } => { ?X a :Answer } .` will produce `\"2005-03-30T11:00:00\"^^xsd:dateTime a :Answer .`""" .
+
+<http://www.w3.org/2000/10/swap/genid#-LmNBy6s0amDKqDjdTHuMg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is any\nobject: $o is list" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:in ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:in" ;
+    rdfs:comment """Determines if an subject is a member of the object list or binds every member of the object list to the subject.
+
+`true` if and only `$o` is a list and `$s` is in that list.
+
+`$s` can be calculated from `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#GB1CxP6qkJXjXZiB4Laxjg>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#iSy6wOtl9KHVnNA__GWfSw> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/file#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "file" .
+
+<http://www.w3.org/2000/10/swap/genid#-5NgByNlH033k5p9jmzK4w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is $s is xsd:dateTime OR $s is xsd:date\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#month> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:month" ;
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer month component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#2sUAsV_oqUO322_eVOk56w>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s1 $s_2) where $s_i is formula\nobject: $o is $o is baseIri OR $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:forAllIn ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:forAllIn" ;
+    rdfs:comment "Built-in for implementing a scoped universal quantification." .
+
+<http://www.w3.org/2000/10/swap/genid#UiJqVy9C6JDByAMzkt9YDA>
+    rdfs:comment """Determines if two RDF resources are not the same.
+
+`true` if and only if `$s` and `$o` are not the same RDF node (symbol or literal).""" .
+
+<http://www.w3.org/2000/10/swap/genid#NVBIoHEGEboc64s1yGjR9w>
+    rdfs:comment """The subject is a pair of numbers. The object
+is calculated by raising the first number of the power of the second.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#OVKLQribeI0YXjVsde-Ccw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:negation ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:negation" ;
+    rdfs:comment "The subject or object is calculated to be the negation of the other." .
+
+<http://www.w3.org/2000/10/swap/genid#JqZGBXmqyEsUPadMwOjmaA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:atan ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:atan" ;
+    rdfs:comment "The object is calulated as the arc tangent value of the subject." .
+
+<http://www.w3.org/2000/10/swap/genid#X3DRUobI28UR7dKaKx9XnQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:quotient ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:quotient" ;
+    rdfs:comment """The subject is a pair of numbers. The object
+is calculated by dividing the first number of the pair by the second.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#L4i3ECu8uVIf728sREaL0g>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is baseIri\nobject: $o is $o is xsd:dateTime OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/time#currentTime> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "time:currentTime" .
+
+<http://www.w3.org/2000/10/swap/genid#J4lllt7DtC2MDMmGXfgHMA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1 $s_2) where $s_0 is stringable, $s_1 is regex, $s_2 is stringable\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#replace> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:replace" ;
+    rdfs:comment """A built-in for replacing characters or sub.
+takes a list of 3 strings; the first is the
+input data, the second the old and the third the new string.
+The object is calculated as the replaced string.
+For example, (\"fofof bar\", \"of\", \"baz\") string:replace \"fbazbaz bar\".""" .
+
+<http://www.w3.org/2000/10/swap/genid#XBK8IHZu8KiocifagkKubw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:logarithm ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:logarithm" .
+
+<http://www.w3.org/2000/10/swap/genid#O_dIk0lDUMd3Tze0yA5uVw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#contains> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:contains" ;
+    rdfs:comment "True iff the subject string contains the object string." .
+
+<http://www.w3.org/2000/10/swap/genid#-AOwcGKPsgXNFsmHCAht7w>
+    rdfs:comment "Built-in for implementing a scoped universal quantification." .
+
+<http://www.w3.org/2000/10/swap/genid#tSoxzAoWKt8L47xNpfyrZA>
+    rdfs:comment """A built-in for replacing characters or sub.
+takes a list of 3 strings; the first is the
+input data, the second the old and the third the new string.
+The object is calculated as the replaced string.
+For example, (\"fofof bar\", \"of\", \"baz\") string:replace \"fbazbaz bar\".""" .
+
+<http://www.w3.org/2000/10/swap/genid#kEo_ddUQSYdE6tpXlNchhA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_1 .. $s_n) where $s_i is formula\nobject: $o is $o is formula OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:conjunction ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:conjunction" ;
+    rdfs:comment """A function to merge formulae: logical AND.
+
+`true` if and only if `o`, which can be generated, is a formula containing a copy of each of the formulae `$s_1 .. $s_n`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#tsANSaBvLZd-vFuevweiiw>
+    rdfs:comment """The log:semantics of a document is the formula achieved by parsing representation of the document.
+For a document in Notation3, `log:semantics` is the `log:parsedAsN3` of the `log:content` of the document.
+For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 `log:Formula`).
+Evaluates to `false` if an unrecognized document format is retrieved.
+Aside: Philosophers will be distracted here into worrying about the meaning of meaning. At least we didn't call this function \"meaning\"! 
+In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
+Related: see `log:parsedAsN3` and `log:content`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#iexfFxcwm5_wSI5TIobUJg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:acosh ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:acosh" .
+
+<http://www.w3.org/2000/10/swap/genid#v1OrcNtadsyQK8x0w4pd8Q>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s_0 $s_1) where $s_0 is list, $s_1 is concrete\nobject: $o is $o is list OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        list:remove ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "list:remove" ;
+    rdfs:comment """Removes the second component of the subject list from the first component of that list.
+
+`true` if and only if the subject is a list of two lists `$s_1` and `$s_2`, `$s_2` is a subset of `$s_1` and `$o` is a list composed of the members of the `$s_1` with all members of `$s_2` removed, matching left to right.
+
+`$o` can be calculated as a function of the subject.
+
+Example: `( (1 2 3 4) (2 3) ) list:remove (1 4).`""" .
+
+<http://www.w3.org/2000/10/swap/genid#VvJRTwT7KcanzlpS4M3CRA>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#BSLxk_DConTw191lrk-Jlw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#oQKLpidykyCh2HBGU9PMPw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#nZNVVwhlvC31U3G5C-93tA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#j7Xi7QGbOEqlJaVGlaWmBA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#Gc1Rv2JDft7qY0Ja6ICx4Q> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#8km6anm_Kmvj61YFWVW8BA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#XWg2uz4g82ZP9BXYW6vucg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#-boHvDhVywjhvS5GZLwUIA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#XIxYYKusOV4rAblBKzQ4hA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#lULZEn0_WZg9bizcUil3GQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#7kZ7_DaLXDsjLzJ31hBr2g> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#eYXCp8PUZ3B0_Nr_TL_jpg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#qqXvzvTezqs6W5q8OieM5w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#K9iTkGiPtiJGbqlI0UaoUQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#DNHP6LqweQXyhO6UCeWjIg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#qFDWGiJJolbBcwH0CQuMiw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#2sUAsV_oqUO322_eVOk56w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#xmLG5Jla_ilBJMiI4Z1rbA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#SPaGc3LQVvPNLqrd3KsutA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#bcMrhe0LZXvp4ww29IUA4g> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#OMHIf4i7sJd6bURfnAQDRw> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#kEo_ddUQSYdE6tpXlNchhA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#PThbYRyN_YG_YUAT6H5lLQ> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#QCQ7Eh-p0UeQWRmIY2UyWg> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#VYNgDv6zVgQ_T82cglrGYg> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/log#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "log" .
+
+<http://www.w3.org/2000/10/swap/genid#xCBteMsEOPD8gt6nY4zkVQ>
+    rdfs:comment """
+`true` if and only if $s is a `xsd:dateTime` and $o is the integer seconds component of the dateTime.
+
+$o can be calculated as a function of $s.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#KfGln6OjvQAVae_60B0RLw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:cos ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:cos" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the cosine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#LfTUBjUKvbPzjHmKmT1Sig>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the hyperbolic tangent value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#GUmo5XeMMkoWEYv0O9AtWw>
+    rdfs:comment """Determines if an object is a member of the subject list or binds every member of the subject list to the object.
+
+`true` if and only `$s` is a list and `o` is in that list.
+
+`$o` can be calculated from `$s`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#1WwNXwP5HH8OoF3gpct1VQ>
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the sine value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#nZNVVwhlvC31U3G5C-93tA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is concrete\nobject: $o is $o is iri OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:rawType ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:rawType" ;
+    rdfs:comment """Returns an identifier based on the type of the RDF Resource.
+
+`true` if the type of `$s` is the same as `$o`, or binds the type to `$o`.
+
+`$o` is unbound or one of `log:Formula`, `log:Literal`, `log:List`, `log:Set` or `log:Other`.
+
+Example: `log:semanticsOrError` returns either a formula or a string, and you can check which using `log:rawType`. """ .
+
+<http://www.w3.org/2000/10/swap/genid#-cCawjDzTrNiAZMzIbez0A>
+    rdfs:comment """All possible conclusions which can be drawn from a formula.
+
+`true` if and only if `$o` is the set of conclusions which can be drawn from `$s`, by successively applying any rules it contains to the data it contains.
+Note: this is equivalent to cwm's \"--think\" command line function. It does use built-ins, so it may for example indirectly invoke other documents, validate signatures, etc.""" .
+
+<http://www.w3.org/2000/10/swap/genid#RrVc8x4fUBGX61MTZpR2MQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:tan ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:tan" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the tangent value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#T3ncF4PS_NU1nTNGOtNywg>
+    rdfs:comment """Determines if two RDF resources are the same.
+
+`true` if and only if `$s` and `$o` are the same RDF node (symbol or literal).
+
+Not to be confused with owl:sameAs.""" .
+
+<http://www.w3.org/2000/10/swap/genid#8JV84FvuwvHcF5648edecg>
+    rdfs:comment """The subject is a key and the object is a string,
+where the strings are to be output in the order of the keys.
+See cwm --strings in cwm --help.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#rLaZexJunFQM7HFr8LsAaQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:greaterThan ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:greaterThan" ;
+    rdfs:comment "`true` if and only if the subject is a number which is greater than the object." .
+
+<http://www.w3.org/2000/10/swap/genid#3qeaKyk3hdITjZuSh9LwGQ>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is $o is numberable OR $o is variable\nOR\nsubject: $s is $s is numberable OR $s is variable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:degrees ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:degrees" ;
+    rdfs:comment """The subject is an angle expressed in radians.
+The object is calulated as the conversion in degrees of the value of the subject.""" .
+
+<http://www.w3.org/2000/10/swap/genid#XWg2uz4g82ZP9BXYW6vucg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is stringable OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is stringable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:prefix ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:prefix" .
+
+<http://www.w3.org/2000/10/swap/genid#862gRm5HHtSyXfFF3aCi6A>
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#j5wGcIm17eCPNvGDWfTG8w> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#_03-vg2A8hgFPOatTNb6AA> ;
+    <http://www.w3.org/2000/10/swap/builtin#builtin>
+        <http://www.w3.org/2000/10/swap/genid#TL1dB0564hdyQtTuNF5z1g> ;
+    <http://www.w3.org/2000/10/swap/builtin#namespace>
+        "http://www.w3.org/2000/10/swap/graph#" ;
+    <http://www.w3.org/2000/10/swap/builtin#prefix>
+        "graph" .
+
+<http://www.w3.org/2000/10/swap/genid#DFFdEreDZ7YdoimRzhyLNg>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is ($s1 $s_2) where $s_i is $s_i is numberable OR $s_i is variable\nobject: $o is $o is numberable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:difference ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:difference" ;
+    rdfs:comment """The subject is a pair of numbers. The object
+is calculated by subtracting the second number of the pair from the first.
+""" .
+
+<http://www.w3.org/2000/10/swap/genid#g02xwnH5z473mRFbtE6voA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is stringable\nobject: $o is $o is intable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        <http://www.w3.org/2000/10/swap/string#length> ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "string:length" .
+
+<http://www.w3.org/2000/10/swap/genid#BSLxk_DConTw191lrk-Jlw>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is any\nobject: $o is $o is xsd:boolean OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:bound ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:bound" .
+
+<http://www.w3.org/2000/10/swap/genid#7kZ7_DaLXDsjLzJ31hBr2g>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is string\nobject: $o is $o is formula OR $o is variable\nOR\nsubject: $s is variable\nobject: $o is formula" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:parsedAsN3 ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:parsedAsN3" ;
+    rdfs:comment """The subject string, parsed as N3, gives this formula.
+
+`true` if and only if `$s`, parsed as N3, gives `$o`.
+
+`$s` should be a syntactically valid string in N3 format.
+
+Related: see `log:n3String`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#8km6anm_Kmvj61YFWVW8BA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is iri\nobject: $o is $o is stringable OR $o is variable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        log:nameSpace ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "log:nameSpace" .
+
+<http://www.w3.org/2000/10/swap/genid#ExgvxOo6qJ3C7UfCA6IqXQ>
+    rdfs:comment """A function to merge formulae: logical AND.
+
+`true` if and only if `o`, which can be generated, is a formula containing a copy of each of the formulae `$s_1 .. $s_n`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#dkqjyrS_7VIbr-mYbqp-hA>
+    <http://www.w3.org/2000/10/swap/builtin#schema>
+        "subject: $s is numberable\nobject: $o is numberable" ;
+    <http://www.w3.org/2000/10/swap/builtin#uri>
+        math:equalTo ;
+    <http://www.w3.org/2000/10/swap/builtin#name>
+        "math:equalTo" ;
+    rdfs:comment """Checks equality of numbers.
+   
+`true` if and only if `$s` is equal to `$o`.""" .
+
+<http://www.w3.org/2000/10/swap/genid#NqNeOlyMXwN0dh5SNAn76Q>
+    rdfs:comment """Checks equality of numbers.
+   
+`true` if and only if `$s` is equal to `$o`.""" .

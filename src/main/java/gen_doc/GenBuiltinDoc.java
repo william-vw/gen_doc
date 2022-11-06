@@ -3,15 +3,24 @@ package gen_doc;
 import static org.apache.jen3.n3.N3ModelSpec.Types.N3_MEM;
 import static org.apache.jen3.n3.N3ModelSpec.Types.N3_MEM_FP_INF;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.jen3.n3.FeedbackActions;
 import org.apache.jen3.n3.N3Feedback;
 import org.apache.jen3.n3.N3MistakeTypes;
@@ -19,8 +28,6 @@ import org.apache.jen3.n3.N3Model;
 import org.apache.jen3.n3.N3ModelSpec;
 import org.apache.jen3.rdf.model.ModelFactory;
 import org.apache.jen3.rdf.model.Resource;
-import org.apache.jen3.rdf.model.Statement;
-import org.apache.jen3.util.IOUtils;
 import org.apache.jen3.vocabulary.RDF;
 import org.apache.jen3.vocabulary.RDFS;
 
@@ -28,12 +35,75 @@ import wvw.utils.rdf.NS;
 
 public class GenBuiltinDoc {
 
-	private static String builtinsPath = "src/main/resources/builtins_illiberal.n3";
+	private String builtinsPath = "builtins.n3";
+	private String nsFolder = "ns/";
+	private String genSchemaPath = "rules/gen_schemas.n3";
+	private String genEntriesPath = "rules/gen_entries.n3";
+	private String genHtmlPath = "rules/gen_html.n3";
+	private String outFolder = "out/";
+
+	private String htmlName = "builtins.html";
 
 	public static void main(String[] args) throws Exception {
-//		prepBuiltins();
+		Options options = new Options();
+		options.addOption(Option.builder("builtins").argName("builtins").hasArg().desc("builtins.n3 path")
+				.required(false).build());
+		options.addOption(Option.builder("ns").argName("ns").hasArg()
+				.desc("folder for NS builtin files (e.g., math.n3)").required(false).build());
+		options.addOption(
+				Option.builder("schema").argName("schema").hasArg().desc("gen_schema.n3 path").required(false).build());
+		options.addOption(Option.builder("entries").argName("entries").hasArg().desc("gen_entries.n3 path")
+				.required(false).build());
+		options.addOption(
+				Option.builder("html").argName("html").hasArg().desc("gen_html.n3 path").required(false).build());
+		options.addOption(Option.builder("out").argName("out").hasArg().desc("output folder").required(false).build());
 
-		genSchemas();
+		CommandLineParser parser = new DefaultParser();
+		CommandLine line = null;
+		try {
+			line = parser.parse(options, args);
+		} catch (ParseException exp) {
+			System.err.println("ERROR: " + exp.getMessage());
+			System.exit(1);
+		}
+
+		GenBuiltinDoc gen = new GenBuiltinDoc();
+
+		if (line.hasOption("builtins"))
+			gen.builtinsPath = line.getOptionValue("builtins");
+
+		if (line.hasOption("ns"))
+			gen.nsFolder = line.getOptionValue("ns");
+
+		if (line.hasOption("schema"))
+			gen.genSchemaPath = line.getOptionValue("schema");
+
+		if (line.hasOption("entries"))
+			gen.genEntriesPath = line.getOptionValue("entries");
+
+		if (line.hasOption("html"))
+			gen.genEntriesPath = line.getOptionValue("html");
+
+		if (line.hasOption("out"))
+			gen.outFolder = line.getOptionValue("out");
+
+		gen.generate();
+
+	}
+
+	public void generate() throws IOException {
+		// no need for schema-gen if builtins.n3 was not updated since last gen
+		File htmlFile = new File(outFolder, htmlName);
+		if (htmlFile.exists()) {
+
+			if (new File(builtinsPath).lastModified() > htmlFile.lastModified()) {
+				System.out.println("builtins.n3 updated - regenerating builtin schemas\n");
+
+				prepBuiltins();
+				genSchemas();
+			}
+		}
+
 		genEntries();
 		genHtml();
 	}
@@ -41,7 +111,8 @@ public class GenBuiltinDoc {
 	// TODO in builtins n3 file, auto-generate 'accept' instead of listing them
 	// (essentially this involves adding variables to all atomic constraints)
 	// instead of this mess (not really needed, just speed things up)
-	public static void prepBuiltins() throws IOException {
+
+	public void prepBuiltins() throws IOException {
 		long start = System.currentTimeMillis();
 
 		N3ModelSpec spec = N3ModelSpec.get(N3_MEM_FP_INF);
@@ -57,15 +128,14 @@ public class GenBuiltinDoc {
 			stmt.remove();
 		});
 
-		String outPath = "src/main/resources/out/builtins_domains.n3";
 //		m.write(System.out);
-		m.write(new FileOutputStream(outPath));
+		m.write(new FileOutputStream(outFolder + "builtins_domains.n3"));
 
 		long end = System.currentTimeMillis();
-		System.out.println("prepped builtins (time: " + (end - start) + "ms)");
+		System.out.println("prepped builtins (time: " + (end - start) + "ms)\n");
 	}
 
-	private static void removeRecursively(Resource s, List<String> properties) {
+	private void removeRecursively(Resource s, List<String> properties) {
 		s.listProperties().toList().forEach(stmt -> {
 			if (properties.contains(stmt.getPredicate().getURI())) {
 
@@ -75,22 +145,20 @@ public class GenBuiltinDoc {
 		});
 	}
 
-	public static void genSchemas() throws IOException {
+	public void genSchemas() throws IOException {
+
+		System.out.println("generating schemas...");
+
 		long start = System.currentTimeMillis();
-
-		String builtinsPath = "src/main/resources/out/builtins_domains.n3";
-		String rulesPath = "src/main/resources/rules/gen_schemas.n3";
-
-		String outPath = "src/main/resources/out/schemas.n3";
 
 		N3ModelSpec spec = N3ModelSpec.get(N3_MEM_FP_INF);
 		spec.setFeedback(new N3Feedback(N3MistakeTypes.BUILTIN_MISUSE_NS, FeedbackActions.NONE));
 
 		N3Model m = ModelFactory.createN3Model(spec);
-		m.read(new FileInputStream(builtinsPath), "");
-		m.read(new FileInputStream(rulesPath), "");
+		m.read(new FileInputStream(outFolder + "builtins_domains.n3"), "");
+		m.read(new FileInputStream(genSchemaPath), "");
 
-//		m.getDeductionsModel().write(System.out);
+//		m.write(System.out);
 
 		N3Model out = ModelFactory.createN3Model(N3ModelSpec.get(N3_MEM));
 
@@ -110,34 +178,34 @@ public class GenBuiltinDoc {
 		});
 
 		long end = System.currentTimeMillis();
-		System.out.println("\nschemas for " + schemaBuiltins.size() + " out of " + allBuiltins.size() + " builtins");
+		System.out.println("schemas for " + schemaBuiltins.size() + " out of " + allBuiltins.size() + " builtins");
 
 		allBuiltins.removeAll(schemaBuiltins);
 		System.out.println("no schema: " + allBuiltins);
 
-		out.write(new FileOutputStream(outPath));
+		out.write(new FileOutputStream(outFolder + "schemas.n3"));
 
-		System.out.println("generated schemas (time: " + (end - start) + "ms)");
+		System.out.println("generated schemas (time: " + (end - start) + "ms)\n");
 	}
 
-	public static void genEntries() throws IOException {
+	public void genEntries() throws IOException {
 		long start = System.currentTimeMillis();
 
 		N3ModelSpec spec = N3ModelSpec.get(N3_MEM_FP_INF);
 		spec.setFeedback(new N3Feedback(N3MistakeTypes.BUILTIN_MISUSE_NS, FeedbackActions.NONE));
 
 		N3Model m = ModelFactory.createN3Model(spec);
-		m.read(new FileInputStream("src/main/resources/out/schemas.n3"), "");
+		m.read(new FileInputStream(outFolder + "schemas.n3"), "");
 
 		// insert comments
 
 		N3Model ns = ModelFactory.createN3Model(spec);
-		ns.read(new FileInputStream("src/main/resources/ns/crypto.n3"), "");
-		ns.read(new FileInputStream("src/main/resources/ns/list.n3"), "");
-		ns.read(new FileInputStream("src/main/resources/ns/log.n3"), "");
-		ns.read(new FileInputStream("src/main/resources/ns/math.n3"), "");
-		ns.read(new FileInputStream("src/main/resources/ns/string.n3"), "");
-		ns.read(new FileInputStream("src/main/resources/ns/time.n3"), "");
+		ns.read(new FileInputStream(nsFolder + "crypto.n3"), "");
+		ns.read(new FileInputStream(nsFolder + "list.n3"), "");
+		ns.read(new FileInputStream(nsFolder + "log.n3"), "");
+		ns.read(new FileInputStream(nsFolder + "math.n3"), "");
+		ns.read(new FileInputStream(nsFolder + "string.n3"), "");
+		ns.read(new FileInputStream(nsFolder + "time.n3"), "");
 
 		m.listStatements(null, m.createResource(NS.toUri("builtin:schema")), (Resource) null).toList().forEach(stmt -> {
 			Resource builtin = stmt.getSubject();
@@ -148,91 +216,125 @@ public class GenBuiltinDoc {
 
 		// generate entries
 
-		m.read(new FileInputStream("src/main/resources/rules/gen_entries.n3"), "");
+		m.read(new FileInputStream(genEntriesPath), "");
 
 //		m.getDeductionsModel().write(System.out);
 
-		String outPath = "src/main/resources/out/entries.n3";
+		String outPath = outFolder + "entries.n3";
 		m.getDeductionsModel().write(new FileOutputStream(outPath));
 
 		long end = System.currentTimeMillis();
-		System.out.println("\ngenerated entries (time: " + (end - start) + "ms)");
+		System.out.println("generated entries (time: " + (end - start) + "ms)\n");
 	}
 
-	public static void genHtml() throws IOException {
+	public void genHtml() throws IOException {
 		long start = System.currentTimeMillis();
-
-		StringBuffer html = new StringBuffer();
-		html.append("<html><head><link href='style.css' rel='stylesheet' /></head><body>");
 
 		N3ModelSpec spec = N3ModelSpec.get(N3_MEM_FP_INF);
 		spec.setFeedback(new N3Feedback(N3MistakeTypes.BUILTIN_MISUSE_NS, FeedbackActions.NONE));
 
 		N3Model m = ModelFactory.createN3Model(spec);
-		m.read(new FileInputStream("src/main/resources/out/entries.n3"), "");
+		m.read(new FileInputStream(outFolder + "entries.n3"), "");
 
-		m.listStatements(null, m.createResource(NS.toUri("builtin:entry")), (Resource) null).forEachRemaining(stmt -> {
-			Resource entry = stmt.getObject();
-			String prefix = entry.getPropertyResourceValue(m.createResource(NS.toUri("builtin:prefix"))).asLiteral()
-					.getLexicalForm();
-			String ns = entry.getPropertyResourceValue(m.createResource(NS.toUri("builtin:namespace"))).asLiteral()
-					.getLexicalForm();
+		// generate entries
 
-//			System.out.println("-- " + prefix + " (" + ns + ")\n");
+		m.read(new FileInputStream(genHtmlPath), "");
 
-			html.append("<div>");
-			html.append("<h2>").append(prefix).append("</h2>");
-			html.append("(").append(ns).append(")");
+		m.getDeductionsModel().write(System.out);
 
-			List<Statement> stmts2 = m
-					.listStatements(entry, m.createResource(NS.toUri("builtin:builtin")), (Resource) null).toList();
-			// sort builtins alphabetically on name
-			stmts2.sort((s1, s2) -> {
-				return s1.getObject().getPropertyResourceValue(m.createResource(NS.toUri("builtin:name"))).asLiteral()
-						.getLexicalForm()
-						.compareTo(s2.getObject().getPropertyResourceValue(m.createResource(NS.toUri("builtin:name")))
-								.asLiteral().getLexicalForm());
-			});
+		String outPath = outFolder + htmlName;
+		String html = m.listStatements(null, m.createResource(NS.toUri("builtin:out")), (Resource) null).next()
+				.getObject().asLiteral().getLexicalForm();
 
-			stmts2.forEach(stmt2 -> {
-				Resource builtin = stmt2.getObject();
+		Set<Resource> builtins = new HashSet<>(); 
+		m.listStatements(null, m.createResource(NS.toUri("builtin:builtinHtml")), (Resource) null)
+				.forEachRemaining(stmt -> {
+					
+					if (builtins.contains(stmt.getSubject()))
+						System.out.println("DING DONG " + stmt.getSubject().getURI());
+					builtins.add(stmt.getSubject());
+				});
 
-				String uri = builtin.getPropertyResourceValue(m.createResource(NS.toUri("builtin:uri"))).getURI();
-				String name = builtin.getPropertyResourceValue(m.createResource(NS.toUri("builtin:name"))).asLiteral()
-						.getLexicalForm();
-				String schema = builtin.getPropertyResourceValue(m.createResource(NS.toUri("builtin:schema")))
-						.asLiteral().getLexicalForm();
-				String comment = null;
-				if (builtin.hasProperty(RDFS.comment)) {
-					comment = builtin.getPropertyResourceValue(RDFS.comment).asLiteral().getLexicalForm();
-					comment = comment.replaceAll("\n\n", "<br />");
-				}
-
-//				System.out.println(name + " (" + uri + ")\n" + descr + "\n");
-
-				schema = schema.replace("\\n", "<br />").replace("\\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
-				html.append("<div>");
-				html.append("<h4>").append(name).append("</h4>");
-				html.append("(").append(uri).append(")");
-				html.append("<h5>schema</h5>");
-				html.append("<p>").append(schema).append("</p>");
-				if (comment != null) {
-					html.append("<h5>comment</h5>");
-					html.append("<p>").append(comment).append("</p>");
-				}
-				html.append("</div>");
-			});
-			html.append("</div>");
-
-//			System.out.println("\n");
-		});
-
-		html.append("</body></html>");
-
-		String outPath = "src/main/resources/out/builtins.html";
-		IOUtils.writeFile(outPath, html.toString(), false);
+		Files.writeString(Paths.get(outPath), html);
 
 		long end = System.currentTimeMillis();
-		System.out.println("\ngenerated spec (time: " + (end - start) + "ms)");
+		System.out.println("generated html (time: " + (end - start) + "ms)\n");
 	}
+
+//	public void genHtml() throws IOException {
+//		long start = System.currentTimeMillis();
+//
+//		StringBuffer html = new StringBuffer();
+//		html.append("<html><head><link href='style.css' rel='stylesheet' /></head><body>");
+//
+//		N3ModelSpec spec = N3ModelSpec.get(N3_MEM_FP_INF);
+//		spec.setFeedback(new N3Feedback(N3MistakeTypes.BUILTIN_MISUSE_NS, FeedbackActions.NONE));
+//
+//		N3Model m = ModelFactory.createN3Model(spec);
+//		m.read(new FileInputStream(outFolder + "entries.n3"), "");
+//
+//		m.listStatements(null, m.createResource(NS.toUri("builtin:entry")), (Resource) null).forEachRemaining(stmt -> {
+//			Resource entry = stmt.getObject();
+//			String prefix = entry.getPropertyResourceValue(m.createResource(NS.toUri("builtin:prefix"))).asLiteral()
+//					.getLexicalForm();
+//			String ns = entry.getPropertyResourceValue(m.createResource(NS.toUri("builtin:namespace"))).asLiteral()
+//					.getLexicalForm();
+//
+////			System.out.println("-- " + prefix + " (" + ns + ")\n");
+//
+//			html.append("<div>");
+//			html.append("<h2>").append(prefix).append("</h2>");
+//			html.append("(").append(ns).append(")");
+//
+//			List<Statement> stmts2 = m
+//					.listStatements(entry, m.createResource(NS.toUri("builtin:builtin")), (Resource) null).toList();
+//			// sort builtins alphabetically on name
+//			stmts2.sort((s1, s2) -> {
+//				return s1.getObject().getPropertyResourceValue(m.createResource(NS.toUri("builtin:name"))).asLiteral()
+//						.getLexicalForm()
+//						.compareTo(s2.getObject().getPropertyResourceValue(m.createResource(NS.toUri("builtin:name")))
+//								.asLiteral().getLexicalForm());
+//			});
+//
+//			stmts2.forEach(stmt2 -> {
+//				Resource builtin = stmt2.getObject();
+//
+//				String uri = builtin.getPropertyResourceValue(m.createResource(NS.toUri("builtin:uri"))).getURI();
+//				String name = builtin.getPropertyResourceValue(m.createResource(NS.toUri("builtin:name"))).asLiteral()
+//						.getLexicalForm();
+//				String schema = builtin.getPropertyResourceValue(m.createResource(NS.toUri("builtin:schema")))
+//						.asLiteral().getLexicalForm();
+//				String comment = null;
+//				if (builtin.hasProperty(RDFS.comment)) {
+//					comment = builtin.getPropertyResourceValue(RDFS.comment).asLiteral().getLexicalForm();
+//					comment = comment.replaceAll("\n\n", "<br />");
+//				}
+//
+////				System.out.println(name + " (" + uri + ")\n" + descr + "\n");
+//
+//				schema = schema.replace("\\n", "<br />").replace("\\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
+//				html.append("<div>");
+//				html.append("<h4>").append(name).append("</h4>");
+//				html.append("(").append(uri).append(")");
+//				html.append("<h5>schema</h5>");
+//				html.append("<p>").append(schema).append("</p>");
+//				if (comment != null) {
+//					html.append("<h5>comment</h5>");
+//					html.append("<p>").append(comment).append("</p>");
+//				}
+//				html.append("</div>");
+//			});
+//			html.append("</div>");
+//
+////			System.out.println("\n");
+//		});
+//
+//		html.append("</body></html>");
+//
+//		String outPath = outFolder + htmlName;
+//		IOUtils.writeFile(outPath, html.toString(), false);
+//
+//		long end = System.currentTimeMillis();
+//		System.out.println("generated html (time: " + (end - start) + "ms)\n");
+//	}
 }

@@ -1,0 +1,54 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+@prefix crypto: <http://www.w3.org/2000/10/swap/crypto#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix graph: <http://www.w3.org/2000/10/swap/graph#> .
+@prefix file: <http://www.w3.org/2000/10/swap/file#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> . 
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://www.w3.org/2000/10/swap/builtin#> .  
+@base <http://www.w3.org/2000/10/swap/builtin#> .
+
+
+# TODO some sort of mode where prior existence of "similar" blank nodes is checked? ..
+
+{	?builtin :schema ?schema ;
+		log:nameSpace ?nsString .
+	?ns log:uri ?nsString ;
+		log:prefix ?prefix .
+		
+	(?ns) log:skolem ?id .
+	
+} => {	<> :entry ?id . ?id :namespace ?nsString ; :prefix ?prefix } .
+
+
+{	<> :entry ?entry .
+	?entry :namespace ?nsString .
+	
+	?builtin :schema ?schema ;
+		log:nameSpace ?nsString ;
+		log:localName ?lnString .
+		
+	?ns log:uri ?nsString ;
+		log:prefix ?prefix .
+		
+	( ?prefix ":" ?lnString ) string:concatenation ?name .
+		
+	(?builtin) log:skolem ?id .
+		
+} => {	?entry :builtin ?id . ?id :uri ?builtin ; :name ?name ; :schema ?schema } .
+
+
+# possible that builtin doesn't have label
+# (so don't include in above rule)
+
+{	?builtin :schema ?schema ;
+		rdfs:comment ?comment .
+		
+	(?builtin) log:skolem ?id
+
+} => {	?id rdfs:comment ?comment } .	

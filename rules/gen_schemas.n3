@@ -1,0 +1,220 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+@prefix crypto: <http://www.w3.org/2000/10/swap/crypto#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix graph: <http://www.w3.org/2000/10/swap/graph#> .
+@prefix file: <http://www.w3.org/2000/10/swap/file#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> . 
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://www.w3.org/2000/10/swap/builtin#> .  
+@base <http://www.w3.org/2000/10/swap/builtin#> .
+
+
+{	?x :oneOf ?y } => {	?x a :OneOf } .
+
+{	?x :restricts ?y } => { ?x a :Atomic } .
+{	?x :datatype ?y } => { ?x a :Atomic } .
+{	?x :subject ?y ; :object ?z } => { ?x a :Domain } .
+
+{	?x a :OneOf . ?x!:oneOf list:member ?y . ?y!rdf:type rdfs:subClassOf :BaseInputConstraint } => { ?x a :AtomicOneOf } .
+{	?x a :OneOf . ?x!:oneOf list:member ?y . ?y a :Atomic } => { ?x a :AtomicOneOf } .
+{	?x a :OneOf . ?x!:oneOf list:member ?y . ?y a :Domain } => { ?x a :DomainOneOf } .
+
+
+# - atomic BaseInputConstraints
+
+{   ?cnstr a ?cnstrType . 
+    ?cnstrType rdfs:subClassOf :BaseInputConstraint .
+
+    ?cnstr log:localName ?typeLabel .
+    ( "$a is " ?typeLabel ) string:concatenation ?label
+
+} => {  ?cnstr rdfs:label ?label } .
+
+
+# - manual datatype constraints
+
+{  	?cnstr :datatype ?dt .
+
+	?dt log:nameSpace ?nsString .
+    ?dt log:localName ?lnString .
+
+    ?ns log:uri ?nsString .
+    ?ns log:prefix ?prefix .
+    ( ?prefix ":" ?lnString ) string:concatenation ?typeLabel .
+    
+    ( "$a is " ?typeLabel ) string:concatenation ?label
+
+} => { ?cnstr rdfs:label ?label } .
+
+
+# - ListInputConstraint (without size or element type)
+
+{	?cnstr a :ListInputConstraint .
+		
+	<> log:notIncludes { ?cnstr :size ?size } .
+	<> log:notIncludes { ?cnstr :listElementType ?type } .
+	
+} => {	?cnstr rdfs:label "$a is list" } .
+
+
+# - ListInputConstraint (without size)
+
+{	?cnstr :listElementType ?type .
+		
+	<> log:notIncludes { ?cnstr :size ?size } .
+	
+	?type rdfs:label ?typeLabel .
+	( ?typeLabel "\\$a" "\\$a_i" ) string:replace ?typeLabel2 .
+	
+	( "$a is ($a_1 .. $a_n) where " ?typeLabel2 ) string:concatenation ?label
+	
+} => {	?cnstr rdfs:label ?label } .
+
+
+# - ListInputConstraint (with size 2)
+
+{	?cnstr :listElementType ?type ;
+		:size [ a :Exact ; rdf:value 2 ] .
+	
+	?type rdfs:label ?typeLabel .
+	( ?typeLabel "\\$a" "\\$a_i" ) string:replace ?typeLabel2 .
+	
+	( "$a is ($a1 $a_2) where " ?typeLabel2 ) string:concatenation ?label
+	
+} => {	?cnstr rdfs:label ?label } .
+
+
+# - ListInputConstraints (listed elements)
+
+{	?cnstr :listElements ?elements .
+	
+	(?listItem
+	{	?elements list:iterate ( ?i ?element ) . 
+		( "$a_" ?i ) string:concatenation ?listItem
+	} 
+	?listItems) log:collectAllIn <> .
+	
+	(?argLabel
+	{	?elements list:iterate (?i ?element) .
+		
+		?element rdfs:label ?typeLabel .
+		( "\\$a_" ?i ) string:concatenation ?arg .
+		( ?typeLabel "\\$a" ?arg ) string:replace ?argLabel .
+	} 
+	?argLabels) log:collectAllIn <> .
+	
+	?listItems list:length ?argLabels!list:length . 
+	
+	( ?listItems " " ) string:join ?itemStr .
+	( ?argLabels ", " ) string:join ?typeStr .
+	
+	( "$a is (" ?itemStr ") where " ?typeStr ) string:concatenation ?label
+	
+} => {	?cnstr rdfs:label ?label } .
+
+
+# - oneOfs
+
+# of atomics
+{   ?cnstr a :AtomicOneOf .
+
+    # TODO builtin that collects at the same time
+	( 	{ ?cnstr!:oneOf list:member ?x }
+    	{ ?x rdfs:label ?y } 
+    ) log:forAllIn <> .
+
+    (?typeLabel
+    {   ?cnstr!:oneOf!list:member rdfs:label ?typeLabel .
+        #( ?elLabel "/$a is (.*?)/" ) string:scrape ?typeLabel
+        
+    } ?typeLabels) log:collectAllIn <> .
+
+    ( ?typeLabels " OR " ) string:join ?label0 .
+    ( "$a is " ?label0 ) string:concatenation ?label
+
+} => {  ?cnstr rdfs:label ?label } .
+
+
+# of domains
+{   ?cnstr a :DomainOneOf .
+    
+    # TODO builtin that collects at the same time
+    ( 	{ ?cnstr!:oneOf list:member ?x }
+    	{ ?x rdfs:label ?y } 
+    ) log:forAllIn <> .
+    
+    (?elLabel
+    {   ?cnstr!:oneOf!list:member rdfs:label ?elLabel .
+        
+    } ?elLabels) log:collectAllIn <> .
+    
+    ?elLabels list:length ?len .
+
+    ( ?elLabels "\nOR\n" ) string:join ?label .
+
+} => {  ?cnstr rdfs:label ?label } .
+
+
+# - propagate labels to "restricts" references
+  
+{	?cnstr :restricts ?cnstr0 .
+	?cnstr0 rdfs:label ?label .
+
+} => { ?cnstr rdfs:label ?label } .
+
+
+# - subject and object parts
+
+{	( ( :subject "s") ( :object "o" ) ) list:iterate ( ?i ?entry ) .
+	( ?entry 0 ) list:memberAt ?prp . 
+	( ?entry 1 ) list:memberAt ?varStr .
+	
+	?domain ?prp ?so .
+	?so rdfs:label ?soLabel .
+
+	( "\\$" ?varStr ) string:concatenation ?varStr2 .
+	( ?soLabel "\\$a" ?varStr2 ) string:replace ?label .
+
+	# TODO why is this an issue here
+	(?so) log:skolem ?id .
+
+} => {	?id rdfs:label ?label } .
+
+
+# - domains themselves
+	
+{	?domain :subject ?s ;
+		:object ?o .
+	
+	(?s)!log:skolem rdfs:label ?sLabel .
+	(?o)!log:skolem rdfs:label ?oLabel .
+
+	# also use builtin name as part of label (also see last rule)
+	#( ?sLabel " _builtin_ " ?oLabel ) string:concatenation ?label
+	( "subject: " ?sLabel "\n" "object: " ?oLabel ) string:concatenation ?label
+
+} => {	?domain rdfs:label ?label } .
+
+
+# - builtins!
+
+{	?builtin a :BuiltinDefinition ;
+		:inputConstraints ?cnstr .
+	
+	?builtin log:nameSpace ?nsString .
+	?builtin log:localName ?lnString .
+
+    ?ns log:uri ?nsString .
+    ?ns log:prefix ?prefix .
+    ( "\\\\n\\\\t" ?prefix ":" ?lnString "\\\\n" ) string:concatenation ?builtinLabel .
+		
+	?cnstr!:domain rdfs:label ?cnstrLabel .
+	# also use builtin name as part of label (also see prior rule)
+	#( ?cnstrLabel "/_builtin_/" ?builtinLabel ) string:replace ?label
+	
+} => {	?builtin :schema ?cnstrLabel } . 
