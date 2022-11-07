@@ -129,13 +129,13 @@
     ) log:forAllIn <> .
 
     (?typeLabel
-    {   ?cnstr!:oneOf!list:member rdfs:label ?typeLabel .
+    {   ?cnstr!:oneOf!list:member rdfs:label ?elLabel .
+    	( "(" ?elLabel ")" ) string:concatenation ?typeLabel
         #( ?elLabel "/$a is (.*?)/" ) string:scrape ?typeLabel
         
     } ?typeLabels) log:collectAllIn <> .
 
-    ( ?typeLabels " OR " ) string:join ?label0 .
-    ( "$a is " ?label0 ) string:concatenation ?label
+    ( ?typeLabels " OR " ) string:join ?label .
 
 } => {  ?cnstr rdfs:label ?label } .
 

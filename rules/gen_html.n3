@@ -25,7 +25,7 @@
 	
 	( ?comment "\\n\\n" "<br />" ) string:replace ?comment2 .
 	
-	( "<h5><p>" ?comment2 "</p></h5>") string:concatenation ?htmlComment .
+	( "<p>" ?comment2 "</p>") string:concatenation ?htmlComment .
 	
 } => {	?builtin :htmlComment ?htmlComment } .
 
@@ -62,7 +62,7 @@
 	
 	?builtins list:length ?htmls!list:length . 
 
-	( ?htmls "\n" ) string:join ?builtinsStr .
+	( ?htmls "<br />" ) string:join ?builtinsStr .
 	
 	( "<div>" "<h2>" ?prefix "</h2>" "(" ?ns ")" ?builtinsStr "</div>" )
 		string:concatenation ?entryHtml
@@ -77,7 +77,7 @@
 	
 	?entries list:length ?htmls!list:length . 
 
-	( ?htmls "\n" ) string:join ?entriesStr .
+	( ?htmls "<br />" ) string:join ?entriesStr .
 	
 	( 	"<html>"
 			"<head><link href='style.css' rel='stylesheet' /></head>"

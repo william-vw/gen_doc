@@ -16,50 +16,53 @@
 
 _:b1  :oneOf ( _:b2 _:b3 ) .
 
-_:b4  :restricts :intable .
-
-_:b5  :restricts :regexOrVariable .
-
-_:b6  :object _:b7 ;
-    :subject _:b8 .
-
-_:b9  :restricts :numberableOrVariable .
-
-_:b10
-    :oneOf ( _:b11 _:b12 ) .
+_:b4  :oneOf ( _:b5 _:b6 ) .
 
 string:endsWith
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b13
-    :restricts :boolOrVariable .
+_:b7  :restricts :intableOrVariable .
 
-_:b14
-    :restricts :concrete .
+_:b8  :restricts :variable .
 
-_:b15
-    :restricts :stringable .
+_:b9  :restricts :listOrVariable .
 
 graph:length
-    :inputConstraints _:b16 ;
+    :inputConstraints _:b10 ;
     a   :BuiltinDefinition .
 
-_:b17
-    :restricts :stringable .
+_:b11
+    :domain _:b12 .
 
-_:b18
-    :restricts :regexOrVariable .
+_:b13
+    :object _:b14 ;
+    :subject _:b15 .
+
+_:b16
+    :oneOf ( _:b17 _:b18 _:b19 ) .
 
 math:quotient
     :inputConstraints :twoNumberListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b19
-    :restricts :concrete .
+_:b20
+    :restricts :listOrVariable .
+
+_:b14
+    :restricts :regex .
+
+_:b21
+    :listElementType _:b22 .
+
+_:b23
+    :domain _:b24 .
 
 :timeType
-    :oneOf ( _:b20 _:b21 ) .
+    :oneOf ( _:b25 _:b26 ) .
+
+_:b27
+    :restricts :variable .
 
 math:lessThan
     :inputConstraints :concreteNumbers ;
@@ -69,48 +72,56 @@ math:asin
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b22
-    :restricts :timeType .
-
-_:b23
-    :restricts :iriOrVariable .
-
-_:b24
-    :object _:b25 ;
-    :subject _:b26 .
-
-:stringAndRegex
-    a   :InputConstraintsDefinition ;
-    :domain _:b27 .
-
-:boolOrVariable
-    :oneOf ( _:b28 :variable ) .
+_:b28
+    :restricts :concreteList .
 
 _:b29
     :restricts :variable .
+
+:stringAndRegex
+    a   :InputConstraintsDefinition ;
+    :domain _:b13 .
+
+:boolOrVariable
+    :oneOf ( _:b30 :variable ) .
 
 time:day
     :inputConstraints :dateAndIntableOrVariable ;
     a   :BuiltinDefinition .
 
-_:b30
+_:b31
     :restricts :listOrVariable .
+
+_:b19
+    :restricts :variable .
+
+_:b32
+    :object _:b33 ;
+    :subject _:b34 .
 
 :concreteAndConcreteList
     a   :InputConstraints ;
-    :domain _:b31 .
+    :domain _:b35 .
 
-_:b32
-    :restricts :formulaOrVariable .
-
-_:b33
+_:b36
     :restricts :formula .
 
-_:b34
-    :restricts :variable .
+_:b37
+    :domain _:b38 .
 
-_:b35
-    :restricts :numberable .
+_:b39
+    :oneOf ( _:b40 _:b41 ) .
+
+_:b42
+    :object _:b43 ;
+    :subject _:b44 .
+
+_:b45
+    :object _:b46 ;
+    :subject _:b47 .
+
+_:b48
+    :restricts :formulaOrVariable .
 
 string:lowerCase
     :inputConstraints :stringAndStringOrVariable ;
@@ -118,36 +129,48 @@ string:lowerCase
 
 :concreteStringListAndStringOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b36 .
+    :domain _:b49 .
 
 string:lessThan
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b37
-    :object _:b38 ;
-    :subject _:b39 .
+_:b50
+    :oneOf ( _:b51 _:b52 ) .
 
-_:b40
-    :restricts :any .
+_:b53
+    :object _:b20 ;
+    :subject _:b54 .
 
-_:b41
-    :restricts :stringableOrVariable .
+_:b55
+    :restricts :stringable .
 
-_:b42
+_:b56
     :restricts :variable .
 
-_:b43
+_:b57
+    :oneOf ( _:b58 _:b59 ) .
+
+_:b60
+    :restricts :iriOrVariable .
+
+_:b61
+    :restricts :concrete .
+
+_:b62
+    :restricts :numberableOrVariable .
+
+_:b63
+    :restricts :variable .
+
+_:b64
     :restricts :intableOrVariable .
 
-_:b44
-    :oneOf ( _:b45 _:b46 _:b47 ) .
-
-_:b48
-    :restricts :listOrVariable .
-
-_:b49
+_:b65
     :restricts :formula .
+
+_:b66
+    :restricts :intable .
 
 :numberableOrVariableList
     a   :ListInputConstraint ;
@@ -157,411 +180,356 @@ math:notGreaterThan
     :inputConstraints :concreteNumbers ;
     a   :BuiltinDefinition .
 
-_:b50
-    :restricts :formula .
+_:b67
+    :object _:b68 ;
+    :subject _:b69 .
 
-_:b51
-    :listElements ( _:b52 _:b53 ) .
+_:b70
+    :restricts :stringableOrVariable .
 
-_:b54
-    :object _:b9 ;
-    :subject _:b55 .
+_:b71
+    :domain _:b72 .
 
-_:b56
-    :restricts :intable .
+_:b73
+    :object _:b70 ;
+    :subject _:b74 .
 
-_:b57
-    :restricts :literalOrVariable .
-
-_:b58
-    :listElements ( _:b59 _:b56 ) .
-
-_:b60
-    :listElementType _:b61 .
+_:b75
+    :oneOf ( _:b76 _:b77 ) .
 
 :intable
     a   :IntableInputConstraint .
 
 string:replaceAll
-    :inputConstraints _:b62 ;
+    :inputConstraints _:b78 ;
     a   :BuiltinDefinition .
 
-_:b63
-    :object :intableOrVariable ;
-    :subject _:b64 .
-
-_:b65
-    :object _:b66 ;
-    :subject _:b67 .
-
-_:b68
+_:b79
     :restricts :variable .
+
+_:b80
+    :restricts :any .
 
 string:format
     :inputConstraints :concreteStringListAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b53
-    :restricts :any .
+_:b81
+    :listElementType _:b62 ;
+    :size _:b82 .
 
-_:b69
-    :oneOf ( _:b24 _:b70 ) .
+_:b83
+    :restricts :concreteList .
 
-_:b71
-    :restricts :regex .
+_:b84
+    :oneOf ( _:b73 _:b85 ) .
 
-_:b21
-    :datatype xsd:time .
-
-_:b72
-    :restricts :variable .
-
-_:b73
+_:b86
     :restricts :stringableOrVariable .
 
-_:b74
-    :domain _:b75 .
+_:b87
+    :restricts :variable .
 
-_:b76
-    :restricts :intableOrVariable .
+_:b88
+    :restricts :stringable .
+
+_:b89
+    :restricts :stringableOrVariable .
 
 math:negation
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b77
-    :object _:b78 ;
-    :subject _:b79 .
+_:b90
+    :domain _:b91 .
 
-_:b80
-    :oneOf ( _:b81 _:b82 ) .
+_:b92
+    :object _:b93 ;
+    :subject _:b94 .
+
+_:b95
+    :object _:b96 ;
+    :subject _:b97 .
 
 :ConcreteInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
-
-_:b83
-    :listElementType _:b84 ;
-    :size _:b85 .
 
 math:absoluteValue
     :inputConstraints :numberAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b86
-    :listElements ( _:b87 _:b40 ) .
-
-_:b88
-    :restricts :literal .
-
-_:b89
-    :oneOf ( _:b90 _:b91 ) .
-
-_:b92
-    :object _:b93 ;
-    :subject _:b58 .
-
-_:b94
-    :domain _:b95 .
-
-_:b96
-    :restricts :any .
-
-_:b97
-    :restricts :stringable .
+_:b98
+    :listElements ( _:b99 _:b100 ) .
 
 list:length
-    :inputConstraints _:b98 ;
+    :inputConstraints _:b101 ;
     a   :BuiltinDefinition .
 
-_:b99
+_:b102
     :restricts :formula .
 
-_:b100
+_:b103
     :restricts :variable .
 
 log:content
-    :inputConstraints _:b101 ;
+    :inputConstraints _:b104 ;
     :isResourceIntensive
         "true"^^xsd:boolean ;
     a   :BuiltinDefinition .
 
-_:b102
-    :domain _:b103 .
+_:b105
+    :object _:b106 ;
+    :subject _:b107 .
 
 log:inferences
     :inputConstraints :formulaAndFormulaOrVariable ;
     a   :BuiltinDefinition .
 
-_:b104
-    :listElements ( _:b105 _:b106 _:b107 ) .
+_:b108
+    :oneOf ( _:b109 _:b110 ) .
+
+_:b111
+    :restricts :stringableOrVariable .
 
 string:notMatches
     :inputConstraints :stringAndRegex ;
     a   :BuiltinDefinition .
 
-_:b108
-    :domain _:b44 .
-
-_:b109
-    :object _:b110 ;
-    :subject _:b111 .
-
-_:b112
-    :oneOf ( _:b113 _:b114 ) .
-
 :stringableList
     a   :ListInputConstraint ;
     :listElementType :stringable .
 
-_:b115
-    :restricts :variable .
+_:b112
+    :restricts :baseIri .
 
-_:b116
-    :restricts :concrete .
+_:b113
+    :restricts :stringable .
 
-_:b117
-    :restricts :variable .
+_:b114
+    :domain _:b115 .
 
 list:sort
-    :inputConstraints _:b118 ;
+    :inputConstraints _:b116 ;
     a   :BuiltinDefinition .
 
-_:b119
-    :restricts :variable .
+_:b117
+    :restricts :iri .
 
-_:b120
-    :domain _:b121 .
+_:b107
+    :restricts :list .
+
+_:b118
+    :restricts :formulaOrVariable .
+
+_:b119
+    :oneOf ( _:b120 _:b121 ) .
 
 _:b122
-    :restricts :variable .
-
-_:b123
-    :oneOf ( _:b124 _:b125 _:b122 ) .
-
-_:b126
-    :restricts :regex .
-
-_:b127
-    :restricts :concrete .
-
-_:b128
-    a   :Exact ;
-    rdf:value "2"^^xsd:int .
-
-_:b129
-    :domain _:b130 .
-
-_:b131
-    :listElements ( _:b132 _:b133 _:b134 ) .
-
-_:b135
-    :listElements ( _:b136 _:b137 ) .
-
-_:b125
-    :restricts :literal .
-
-_:b138
-    :listElements ( _:b139 _:b140 ) .
-
-_:b141
-    :object _:b15 ;
-    :subject _:b142 .
-
-_:b47
-    :object _:b143 ;
-    :subject _:b144 .
+    :object _:b123 ;
+    :subject _:b124 .
 
 :stringOrVariable
     :oneOf ( :string :variable ) .
 
-_:b145
-    :restricts :regexOrVariable .
+_:b125
+    :oneOf ( _:b126 _:b127 ) .
+
+_:b128
+    :object _:b129 ;
+    :subject _:b130 .
+
+_:b131
+    :object _:b132 ;
+    :subject _:b133 .
+
+_:b134
+    :object _:b135 ;
+    :subject _:b136 .
+
+_:b137
+    :oneOf ( _:b138 _:b139 ) .
+
+_:b140
+    :listElements ( _:b141 _:b142 ) .
+
+_:b143
+    :restricts :variable .
+
+_:b144
+    :object _:b145 ;
+    :subject _:b146 .
+
+_:b147
+    :restricts :variable .
 
 list:in
     :inputConstraints :anyAndList ;
     a   :BuiltinDefinition .
 
-_:b146
-    :listElements ( _:b147 _:b148 ) .
-
 _:b148
-    :restricts :concrete .
-
-_:b149
-    :listElements ( _:b150 _:b151 ) .
-
-_:b152
-    :listElements ( _:b153 _:b100 ) .
+    :datatype xsd:dateTime .
 
 list:removeDuplicates
-    :inputConstraints _:b154 ;
+    :inputConstraints _:b11 ;
     a   :BuiltinDefinition .
 
-_:b142
-    :restricts :variable .
-
 log:uri
+    :inputConstraints _:b149 ;
+    a   :BuiltinDefinition .
+
+_:b150
+    :restricts :concrete .
+
+_:b151
+    :restricts :stringable .
+
+_:b152
+    :oneOf ( _:b153 _:b154 ) .
+
+log:dtlit
     :inputConstraints _:b155 ;
     a   :BuiltinDefinition .
 
-log:dtlit
-    :inputConstraints _:b156 ;
-    a   :BuiltinDefinition .
+_:b156
+    :restricts :numberable .
 
 _:b157
-    :restricts :regex .
-
-:stringable
-    a   :StringableInputConstraint .
-
-_:b158
-    :restricts :literal .
-
-:numberableOrVariable
-    :oneOf ( :numberable :variable ) .
-
-_:b159
-    :restricts :iri .
+    :listElements ( _:b158 _:b159 ) .
 
 _:b160
-    :datatype xsd:date .
-
-_:b84
-    :restricts :formula .
+    :restricts :formulaOrVariable .
 
 _:b161
     :restricts :baseIri .
 
+:stringable
+    a   :StringableInputConstraint .
+
 _:b162
-    :restricts :stringOrVariable .
+    :object _:b163 ;
+    :subject _:b164 .
 
-_:b163
-    :object _:b164 ;
-    :subject _:b165 .
+:numberableOrVariable
+    :oneOf ( :numberable :variable ) .
 
-_:b166
-    :listElementType _:b167 .
+_:b165
+    :listElementType _:b166 ;
+    :size _:b167 .
 
 _:b168
-    :restricts :stringable .
+    :object _:b169 ;
+    :subject _:b170 .
+
+_:b171
+    :object _:b172 ;
+    :subject _:b173 .
+
+_:b174
+    :restricts :iri .
 
 math:product
     :inputConstraints :concreteNumberListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b169
-    :domain _:b170 .
-
-_:b171
-    :oneOf ( _:b172 _:b173 ) .
+_:b175
+    :restricts :stringable .
 
 :numberOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b10 .
+    :domain _:b176 .
 
 log:parsedAsN3
-    :inputConstraints _:b174 ;
+    :inputConstraints _:b177 ;
     a   :BuiltinDefinition .
-
-_:b52
-    :restricts :listOrVariable .
-
-_:b175
-    :restricts :intableOrVariable .
-
-graph:difference
-    :inputConstraints _:b176 ;
-    a   :BuiltinDefinition .
-
-_:b177
-    :restricts :numberableOrVariable .
 
 _:b178
-    :restricts :list .
+    :domain _:b42 .
 
-_:b179
-    :object _:b180 ;
-    :subject _:b181 .
+graph:difference
+    :inputConstraints _:b179 ;
+    a   :BuiltinDefinition .
 
-_:b81
-    :object _:b182 ;
-    :subject _:b183 .
+_:b26
+    :datatype xsd:time .
 
-_:b184
-    :restricts :boolOrVariable .
+_:b180
+    :restricts :string .
 
-_:b185
-    :restricts :formula .
-
-_:b59
-    :restricts :list .
-
-_:b186
-    :restricts :baseIri .
-
-_:b187
-    :oneOf ( _:b188 _:b115 ) .
+_:b181
+    :restricts :regex .
 
 list:notIn
     :inputConstraints :concreteAndConcreteList ;
     a   :BuiltinDefinition .
 
-_:b189
+_:b182
+    :restricts :numberableOrVariable .
+
+_:b183
+    :restricts :stringableOrVariable .
+
+_:b68
+    :restricts :formulaOrVariable .
+
+_:b184
+    :oneOf ( _:b185 _:b186 ) .
+
+_:b187
+    :restricts :numberableOrVariable .
+
+_:b166
     :restricts :formula .
 
-_:b190
-    :datatype xsd:dateTime .
-
-_:b191
-    :listElements ( _:b192 _:b193 _:b194 ) .
-
-_:b195
-    :object _:b175 ;
-    :subject _:b196 .
-
-_:b140
-    :restricts :stringable .
-
-_:b197
-    :restricts :timeType .
-
 log:bound
-    :inputConstraints _:b198 ;
+    :inputConstraints _:b37 ;
     a   :BuiltinDefinition .
-
-_:b199
-    :oneOf ( _:b135 _:b200 ) .
 
 log:hasPrefix
-    :inputConstraints _:b201 ;
+    :inputConstraints _:b90 ;
     a   :BuiltinDefinition .
 
-_:b202
-    :restricts :variable .
+_:b188
+    :restricts :numberable .
 
-_:b200
-    :restricts :variable .
+_:b12
+    :object _:b31 ;
+    :subject _:b189 .
 
-_:b203
-    :restricts :variable .
+_:b190
+    :restricts :intableOrVariable .
 
-_:b204
-    :domain _:b205 .
+_:b191
+    :domain _:b192 .
+
+_:b15
+    :restricts :stringable .
+
+_:b193
+    :oneOf ( _:b194 _:b195 ) .
+
+_:b196
+    :restricts :concrete .
 
 :formulaAndFormula
     a   :InputConstraintsDefinition ;
-    :domain _:b206 .
+    :domain _:b197 .
+
+_:b198
+    :restricts :any .
 
 :anyAndList
     a   :InputConstraints ;
-    :domain _:b207 .
+    :domain _:b199 .
 
-_:b208
-    :restricts :listOrVariable .
+_:b200
+    :restricts :stringable .
+
+_:b76
+    :listElements ( _:b201 _:b7 _:b202 ) .
 
 :dateOrTimeAndIntableOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b195 .
+    :domain _:b122 .
 
 time:dayOfWeek
     :inputConstraints :dateAndIntableOrVariable ;
@@ -571,128 +539,162 @@ string:notLessThan
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b209
+_:b203
+    :restricts :formula .
+
+_:b204
+    :restricts :numberableList .
+
+_:b52
     :restricts :variable .
 
-_:b210
-    :restricts :formulaOrVariable .
+_:b205
+    :restricts :concrete .
 
-_:b211
-    :listElements ( _:b212 _:b43 ) .
+_:b34
+    :listElements ( _:b206 _:b207 ) .
 
-_:b143
-    :restricts :literal .
+_:b207
+    :restricts :variable .
+
+_:b10
+    :domain _:b208 .
 
 :FormulaInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b213
-    :object _:b76 ;
-    :subject _:b214 .
+_:b209
+    :restricts :intableOrVariable .
 
-_:b103
-    :object _:b215 ;
-    :subject _:b19 .
+_:b5  :object _:b48 ;
+    :subject _:b180 .
 
-_:b38
-    :restricts :listOrVariable .
+_:b210
+    :restricts :stringable .
 
-_:b216
-    a   :Exact ;
-    rdf:value "2"^^xsd:int .
+_:b211
+    :object _:b212 ;
+    :subject _:b213 .
+
+_:b214
+    :restricts :concreteList .
+
+_:b215
+    :listElements ( _:b111 _:b216 _:b217 ) .
 
 string:notGreaterThan
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b217
-    :restricts :variable .
+_:b218
+    :restricts :stringOrVariable .
 
 :RegexInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b218
+_:b219
+    :restricts :variable .
+
+_:b220
+    :oneOf ( _:b221 _:b79 ) .
+
+_:b222
     :restricts :variable .
 
 :ListInputConstraint
     rdfs:subClassOf :InputConstraint .
 
+_:b223
+    :restricts :stringable .
+
 string:length
-    :inputConstraints _:b219 ;
+    :inputConstraints _:b224 ;
     a   :BuiltinDefinition .
-
-_:b220
-    :restricts :literalOrVariable .
-
-_:b221
-    :restricts :iri .
-
-_:b222
-    :oneOf ( _:b223 _:b224 _:b186 ) .
-
-_:b225
-    :listElementType _:b226 .
-
-_:b227
-    :datatype xsd:dateTime .
 
 list:memberAt
-    :inputConstraints _:b228 ;
+    :inputConstraints _:b225 ;
     a   :BuiltinDefinition .
 
-_:b229
-    :datatype xsd:date .
+_:b226
+    :object _:b196 ;
+    :subject _:b227 .
 
-_:b230
-    :oneOf ( _:b231 _:b34 _:b232 ) .
+_:b228
+    :restricts :any .
 
-_:b233
-    :listElements ( _:b234 _:b4 ) .
+_:b216
+    :oneOf ( _:b229 _:b230 ) .
 
-_:b235
+_:b231
+    :restricts :formula .
+
+_:b139
     :restricts :variable .
 
-_:b236
-    :object _:b237 ;
-    :subject _:b238 .
+_:b44
+    :restricts :concreteList .
 
-_:b239
-    :domain _:b240 .
+_:b232
+    :restricts :baseIri .
+
+_:b233
+    :oneOf ( _:b234 _:b235 ) .
 
 log:semanticsOrError
-    :inputConstraints _:b94 ;
+    :inputConstraints _:b114 ;
     :isResourceIntensive
         "true"^^xsd:boolean ;
     a   :BuiltinDefinition .
 
-_:b241
-    :restricts :numberableOrVariable .
+_:b236
+    :restricts :timeType .
 
 :IriInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
 :concreteNumberListAndNumberOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b236 .
+    :domain _:b237 .
+
+_:b238
+    :restricts :stringable .
+
+_:b239
+    :object _:b9 ;
+    :subject _:b240 .
 
 :numberAndNumberOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b54 .
+    :domain _:b241 .
 
 _:b242
-    :listElements ( _:b243 _:b244 _:b245 ) .
+    :object _:b243 ;
+    :subject _:b88 .
 
-_:b39
-    :restricts :concreteList .
+_:b244
+    :restricts :stringableOrVariable .
+
+_:b245
+    :restricts :listOrVariable .
 
 _:b246
-    :restricts :bnode .
+    :oneOf ( _:b247 _:b248 _:b134 ) .
 
-_:b247
+_:b99
+    :restricts :stringableList .
+
+_:b249
+    :datatype xsd:dateTime .
+
+_:b159
     :restricts :any .
 
-_:b248
-    :restricts :any .
+_:b250
+    :restricts :stringable .
+
+_:b251
+    :object _:b209 ;
+    :subject _:b252 .
 
 math:tan
     :inputConstraints :numberOrVariable ;
@@ -702,65 +704,73 @@ math:floor
     :inputConstraints :numberAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b249
-    :restricts :any .
-
 :baseIri
     a   :BaseIriInputConstraint .
 
-_:b250
-    :restricts :variable .
+_:b253
+    :restricts :formula .
+
+_:b221
+    :restricts :concreteList .
 
 string:contains
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b251
-    :object _:b252 ;
-    :subject _:b253 .
-
-_:b254
-    :restricts :intableOrVariable .
-
 math:degrees
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b255
-    :oneOf ( _:b256 _:b257 ) .
-
-_:b192
-    :restricts :stringable .
-
 :formulaOrVariable
     :oneOf ( :formula :variable ) .
 
-_:b164
-    :restricts :intableOrVariable .
+_:b254
+    :restricts :listOrVariable .
+
+_:b255
+    :listElements ( _:b254 _:b190 ) .
 
 string:containsRoughly
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b114
-    :restricts :variable .
+_:b240
+    :listElements ( _:b256 _:b257 ) .
 
 _:b258
-    :oneOf ( _:b259 _:b218 ) .
+    :restricts :formula .
+
+_:b170
+    :restricts :concreteList .
+
+_:b54
+    :restricts :concreteList .
+
+_:b259
+    a   :Exact ;
+    rdf:value "2"^^xsd:int .
 
 _:b260
-    :listElements ( _:b261 _:b5 _:b262 ) .
+    :object _:b261 ;
+    :subject _:b98 .
 
-_:b67
-    :listElementType _:b263 .
+_:b262
+    :oneOf ( _:b263 _:b264 ) .
 
 log:collectAllIn
-    :inputConstraints _:b264 ;
+    :inputConstraints _:b71 ;
     a   :BuiltinDefinition .
 
+_:b265
+    :object _:b266 ;
+    :subject _:b140 .
+
 log:skolem
-    :inputConstraints _:b74 ;
+    :inputConstraints _:b178 ;
     a   :BuiltinDefinition .
+
+_:b267
+    :oneOf ( _:b83 _:b268 ) .
 
 math:difference
     :inputConstraints :twoNumberListAndNumberOrVariable ;
@@ -770,30 +780,27 @@ string:notContainsRoughly
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b154
-    :domain _:b265 .
-
-_:b266
-    :oneOf ( _:b267 _:b268 ) .
+_:b78
+    :domain _:b269 .
 
 :literalOrVariable
     :oneOf ( :literal :variable ) .
 
-_:b269
-    :restricts :listOrVariable .
+_:b270
+    :restricts :any .
 
 :concrete
     a   :ConcreteInputConstraint .
 
-_:b270
-    :restricts :concrete .
+_:b271
+    :oneOf ( _:b272 _:b8 ) .
 
-_:b215
-    :restricts :iriOrVariable .
+_:b273
+    :restricts :variable .
 
 :concreteAndConcreteOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b255 .
+    :domain _:b274 .
 
 :bnodeOrVariable
     :oneOf ( :bnode :variable ) .
@@ -801,209 +808,213 @@ _:b215
 :literal
     a   :LiteralInputConstraint .
 
-_:b271
-    :oneOf ( _:b60 _:b235 ) .
+_:b194
+    :listElements ( _:b275 _:b228 ) .
+
+_:b158
+    :restricts :listOrVariable .
+
+_:b33
+    :restricts :literal .
 
 :dateType
-    :oneOf ( _:b272 _:b160 ) .
+    :oneOf ( _:b148 _:b276 ) .
+
+_:b277
+    :oneOf ( _:b255 _:b27 ) .
 
 :listAndAny
     a   :InputConstraints ;
-    :domain _:b273 .
+    :domain _:b278 .
 
-_:b176
-    :domain _:b274 .
+_:b279
+    :oneOf ( _:b280 _:b281 _:b282 ) .
 
 math:notLessThan
     :inputConstraints :concreteNumbers ;
     a   :BuiltinDefinition .
 
+_:b283
+    :object :numberableOrVariable ;
+    :subject _:b284 .
+
 string:substring
-    :inputConstraints _:b275 ;
+    :inputConstraints _:b285 ;
     a   :BuiltinDefinition .
-
-_:b276
-    :listElements ( :numberableOrVariable :intableOrVariable ) .
-
-_:b66
-    :restricts :listOrVariable .
 
 string:scrapeAll
-    :inputConstraints _:b120 ;
+    :inputConstraints _:b286 ;
     a   :BuiltinDefinition .
 
-_:b277
-    :restricts :regex .
-
-_:b252
-    :restricts :stringableOrVariable .
+_:b282
+    :restricts :variable .
 
 log:nameSpace
     :inputConstraints :iriAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b205
-    :object _:b278 ;
-    :subject _:b279 .
+_:b287
+    :oneOf ( _:b288 _:b289 ) .
 
-_:b280
-    :restricts :formula .
-
-_:b281
-    :restricts :stringableOrVariable .
-
-_:b282
-    :listElementType _:b283 ;
-    :size _:b128 .
+_:b247
+    :object _:b290 ;
+    :subject _:b291 .
 
 math:sinh
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b28
-    :datatype xsd:boolean .
-
 time:inSeconds
-    :inputConstraints _:b284 ;
+    :inputConstraints _:b292 ;
     a   :BuiltinDefinition .
-
-_:b285
-    :restricts :variable .
-
-_:b286
-    :oneOf ( _:b287 _:b6 _:b288 ) .
 
 :formulaAndFormulaOrVariable
     a   :InputConstraints ;
-    :domain _:b289 .
+    :domain _:b293 .
+
+_:b22
+    :restricts :formula .
+
+_:b278
+    :object _:b270 ;
+    :subject _:b294 .
 
 :stringableOrVariable
     :oneOf ( :stringable :variable ) .
 
-_:b206
-    :object _:b185 ;
-    :subject _:b189 .
-
-_:b290
-    :oneOf ( _:b291 _:b292 ) .
-
 log:rawType
-    :inputConstraints _:b102 ;
+    :inputConstraints _:b295 ;
     a   :BuiltinDefinition .
+
+_:b197
+    :object _:b231 ;
+    :subject _:b102 .
+
+_:b121
+    :restricts :variable .
 
 :bnodeAndStringOrVariable
     a   :InputConstraints ;
-    :domain _:b293 .
+    :domain _:b162 .
+
+_:b296
+    :domain _:b297 .
+
+_:b40
+    :listElements ( _:b298 _:b299 _:b300 ) .
 
 :stringableOrVariableList
     a   :ListInputConstraint ;
     :listElementType :stringableOrVariable .
 
-_:b207
-    :object _:b178 ;
-    :subject _:b249 .
+_:b301
+    :datatype xsd:dateTime .
 
-_:b294
-    :restricts :formulaOrVariable .
-
-_:b226
-    :restricts :stringable .
-
-_:b275
-    :domain _:b295 .
-
-_:b296
-    :restricts :formula .
-
-_:b85
-    a   :Exact ;
-    rdf:value "2"^^xsd:int .
-
-_:b297
-    :restricts :variable .
-
-_:b298
-    :object _:b299 ;
-    :subject _:b104 .
-
-_:b278
-    :oneOf ( _:b190 _:b285 ) .
-
-_:b300
-    :oneOf ( _:b301 _:b302 ) .
-
-_:b287
-    :object _:b57 ;
-    :subject _:b149 .
+_:b302
+    :restricts :stringableOrVariable .
 
 _:b303
-    :object _:b13 ;
-    :subject _:b304 .
+    :restricts :regex .
+
+_:b269
+    :object _:b304 ;
+    :subject _:b305 .
+
+_:b109
+    :listElements ( _:b245 _:b306 ) .
+
+_:b307
+    :restricts :variable .
+
+_:b308
+    :object _:b309 ;
+    :subject _:b165 .
+
+_:b310
+    :object :intableOrVariable ;
+    :subject _:b311 .
+
+_:b312
+    :restricts :variable .
+
+_:b189
+    :restricts :list .
+
+_:b313
+    :restricts :any .
 
 log:notEqualTo
     :inputConstraints :concreteAndConcrete ;
     a   :BuiltinDefinition .
 
-_:b305
-    :restricts :list .
+_:b314
+    :restricts :listOrVariable .
 
-_:b306
-    :restricts :variable .
+_:b163
+    :restricts :stringableOrVariable .
+
+_:b252
+    :restricts :timeType .
+
+_:b290
+    :restricts :literalOrVariable .
 
 :AnyInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b307
-    :restricts :numberable .
+_:b136
+    :restricts :variable .
 
-_:b172
-    :restricts :concreteList .
-
-_:b308
-    :listElementType _:b99 .
-
-_:b256
-    :object _:b248 ;
-    :subject _:b309 .
+_:b315
+    :restricts :stringable .
 
 :BaseIriInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b310
-    :domain _:b92 .
+_:b316
+    :restricts :baseIri .
 
-_:b311
-    :restricts :stringable .
+_:b293
+    :object _:b317 ;
+    :subject _:b318 .
 
-_:b312
-    :object _:b313 ;
-    :subject _:b314 .
+_:b319
+    :oneOf ( _:b249 _:b312 ) .
+
+_:b320
+    :restricts :any .
+
+_:b135
+    :restricts :literal .
+
+_:b321
+    :oneOf ( _:b322 _:b273 ) .
 
 log:includes
     :inputConstraints :formulaOrBaseAndFormula ;
     a   :BuiltinDefinition .
 
-_:b315
-    :oneOf ( _:b316 _:b317 ) .
-
-_:b318
+_:b323
     :restricts :stringable .
 
-_:b319
-    :restricts :listOrVariable .
+_:b324
+    :restricts :stringableOrVariable .
 
-_:b283
-    :restricts :formulaOrVariable .
-
-_:b237
-    :restricts :numberableOrVariable .
+_:b325
+    :listElementType _:b326 .
 
 crypto:sha
     :inputConstraints :stringAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b320
-    :restricts :formula .
+_:b17
+    :restricts :baseIri .
+
+_:b327
+    :restricts :numberableOrVariableList .
+
+_:b328
+    :oneOf ( _:b329 _:b330 _:b56 ) .
 
 math:radians
     :inputConstraints :numberOrVariable ;
@@ -1013,148 +1024,134 @@ math:min
     :inputConstraints :concreteNumberListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b321
-    :listElementType _:b322 .
+_:b322
+    :listElements ( :numberableOrVariable :intableOrVariable ) .
 
-_:b323
-    :restricts :formula .
+_:b142
+    :restricts :intable .
 
-_:b87
-    :restricts :intableOrVariable .
+_:b331
+    :restricts :iri .
 
-_:b234
-    :restricts :list .
+_:b305
+    :listElements ( _:b332 _:b325 _:b333 ) .
 
-_:b324
-    :restricts :baseIri .
+_:b334
+    :oneOf ( _:b258 _:b143 _:b232 ) .
 
-_:b279
-    :restricts :baseIri .
-
-_:b325
-    :restricts :formula .
-
-_:b326
+_:b335
     :restricts :stringableOrVariable .
 
+_:b336
+    :restricts :any .
+
 list:iterate
-    :inputConstraints _:b327 ;
+    :inputConstraints _:b337 ;
     a   :BuiltinDefinition .
 
-_:b328
-    :restricts :variable .
+_:b338
+    :restricts :any .
 
 string:containsIgnoringCase
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b329
-    :object _:b281 ;
-    :subject _:b318 .
+_:b326
+    :restricts :regex .
 
-_:b330
-    :restricts :stringable .
+_:b339
+    :restricts :literal .
 
-_:b132
-    :restricts :stringableOrVariable .
+_:b340
+    :domain _:b239 .
 
-_:b188
-    :listElements ( _:b331 _:b332 ) .
+_:b25
+    :datatype xsd:dateTime .
 
-_:b165
-    :restricts :stringable .
+_:b341
+    :listElements ( _:b324 _:b342 ) .
 
-_:b181
-    :listElementType _:b333 ;
-    :size _:b216 .
-
-_:b334
+_:b343
     :restricts :variable .
 
-_:b228
-    :domain _:b335 .
+_:b192
+    :oneOf ( _:b128 _:b32 _:b344 ) .
+
+_:b345
+    :restricts :numberable .
+
+_:b346
+    :restricts :stringableOrVariable .
+
+_:b169
+    :oneOf ( _:b347 _:b348 ) .
 
 :IntableInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b336
-    :domain _:b337 .
-
-_:b309
-    :restricts :concrete .
-
-time:currentTime
-    :inputConstraints _:b204 ;
-    a   :BuiltinDefinition .
-
-_:b151
-    :restricts :iri .
-
-_:b193
-    :restricts :intable .
-
-_:b338
+_:b96
     :restricts :stringableOrVariable .
 
-_:b339
-    :restricts :stringable .
+time:currentTime
+    :inputConstraints _:b349 ;
+    a   :BuiltinDefinition .
 
-_:b313
-    :restricts :formulaOrVariable .
+_:b349
+    :domain _:b350 .
+
+_:b94
+    :listElementType _:b351 .
+
+_:b352
+    :restricts :variable .
+
+_:b337
+    :domain _:b353 .
 
 time:hour
     :inputConstraints :timeAndIntableOrVariable ;
     a   :BuiltinDefinition .
 
-_:b155
-    :domain _:b69 .
+_:b177
+    :domain _:b4 .
 
 graph:member
-    :inputConstraints _:b340 ;
+    :inputConstraints _:b354 ;
     a   :BuiltinDefinition .
 
-_:b341
-    :object _:b171 ;
-    :subject _:b342 .
+_:b355
+    :restricts :variable .
 
-_:b262
-    :restricts :stringableOrVariable .
+_:b280
+    :restricts :formula .
 
-_:b293
-    :object _:b343 ;
-    :subject _:b246 .
+_:b356
+    :restricts :list .
 
-_:b344
-    :restricts :stringableOrVariable .
+_:b298
+    :restricts :variable .
 
-_:b345
-    a   :Exact ;
-    rdf:value "2"^^xsd:int .
-
-_:b301
-    :datatype xsd:dateTime .
+_:b276
+    :datatype xsd:date .
 
 :dateAndIntableOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b213 .
+    :domain _:b131 .
 
 :LiteralInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b346
-    :oneOf ( _:b347 _:b348 _:b349 ) .
-
 :iri  a   :IriInputConstraint .
 
-_:b350
-    :restricts :stringable .
+_:b357
+    :restricts :formulaOrVariable .
+
+_:b41
+    :restricts :variable .
 
 :twoNumberListAndNumberOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b179 .
-
-_:b224
-    :restricts :variable .
+    :domain _:b45 .
 
 list:last
     :inputConstraints :listAndAny ;
@@ -1164,66 +1161,95 @@ math:roundedTo
     :inputConstraints :numberIntListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b351
-    :restricts :intableOrVariable .
+_:b358
+    :restricts :formula .
 
-_:b352
-    :restricts :stringableOrVariable .
+_:b295
+    :domain _:b359 .
 
-_:b79
-    :oneOf ( _:b323 _:b353 ) .
+_:b360
+    :oneOf ( _:b361 _:b29 ) .
 
-_:b343
-    :restricts :stringableOrVariable .
+_:b362
+    :listElements ( _:b363 _:b355 ) .
 
-_:b354
-    :restricts :stringable .
+_:b364
+    :domain _:b308 .
+
+_:b263
+    :listElements ( _:b183 _:b365 _:b302 ) .
 
 log:uuid
-    :inputConstraints _:b355 ;
+    :inputConstraints _:b23 ;
     a   :BuiltinDefinition .
 
-_:b356
-    :listElements ( _:b319 _:b357 ) .
+_:b176
+    :oneOf ( _:b366 _:b367 ) .
 
-_:b358
-    :restricts :any .
+_:b292
+    :domain _:b368 .
 
-_:b182
+_:b261
+    :restricts :stringOrVariable .
+
+_:b369
     :restricts :formulaOrVariable .
-
-_:b26
-    :restricts :iri .
-
-_:b147
-    :restricts :list .
 
 math:notEqualTo
     :inputConstraints :concreteNumbers ;
     a   :BuiltinDefinition .
 
-_:b359
-    :restricts :baseIri .
+_:b370
+    :restricts :stringableList .
 
-_:b245
+_:b82
+    a   :Exact ;
+    rdf:value "2"^^xsd:int .
+
+_:b366
+    :object _:b371 ;
+    :subject _:b372 .
+
+_:b373
+    :restricts :regex .
+
+_:b374
     :restricts :intableOrVariable .
 
-_:b360
-    :object _:b361 ;
-    :subject _:b325 .
+_:b35
+    :object _:b28 ;
+    :subject _:b375 .
 
-_:b316
-    :listElements ( :intableOrVariable :intableOrVariable ) .
+_:b186
+    :restricts :variable .
 
-_:b273
-    :object _:b362 ;
-    :subject _:b363 .
+_:b376
+    :restricts :numberableOrVariable .
 
-_:b55
-    :restricts :numberable .
+_:b266
+    :restricts :any .
 
-_:b364
-    :oneOf ( _:b359 _:b280 _:b365 ) .
+_:b377
+    :listElements ( _:b200 _:b373 ) .
+
+_:b378
+    :oneOf ( _:b81 _:b379 ) .
+
+_:b350
+    :object _:b119 ;
+    :subject _:b380 .
+
+_:b381
+    :oneOf ( _:b382 _:b65 _:b383 ) .
+
+_:b2  :listElementType _:b160 ;
+    :size _:b384 .
+
+_:b93
+    :restricts :listOrVariable .
+
+_:b385
+    :datatype xsd:date .
 
 :intableOrVariable
     :oneOf ( :intable :variable ) .
@@ -1236,252 +1262,194 @@ time:second
     :inputConstraints :timeAndIntableOrVariable ;
     a   :BuiltinDefinition .
 
-_:b366
-    :oneOf ( _:b51 _:b367 ) .
+_:b384
+    a   :Exact ;
+    rdf:value "2"^^xsd:int .
 
-_:b64
-    :listElements ( :intable :intable ) .
+_:b386
+    :object _:b244 ;
+    :subject _:b387 .
 
-_:b368
-    :restricts :variable .
-
-_:b31
-    :object _:b369 ;
-    :subject _:b270 .
-
-_:b353
-    :restricts :baseIri .
-
-_:b370
-    :listElementType _:b320 ;
-    :size _:b345 .
+_:b153
+    :object _:b388 ;
+    :subject _:b174 .
 
 :iriAndFormula
     a   :InputConstraints ;
-    :domain _:b371 .
+    :domain _:b67 .
 
-_:b363
-    :restricts :list .
+_:b179
+    :domain _:b171 .
 
-_:b95
-    :object _:b123 ;
-    :subject _:b221 .
+_:b3  :restricts :variable .
 
-_:b243
-    :restricts :stringableOrVariable .
-
-_:b333
-    :restricts :numberableOrVariable .
-
-_:b372
-    :listElements ( _:b373 _:b311 ) .
-
-_:b232
-    :restricts :baseIri .
-
-_:b374
-    :restricts :formula .
+_:b74
+    :restricts :stringable .
 
 string:scrape
-    :inputConstraints _:b375 ;
+    :inputConstraints _:b389 ;
     a   :BuiltinDefinition .
 
-_:b70
-    :object _:b376 ;
-    :subject _:b377 .
+_:b390
+    :restricts :formulaOrVariable .
 
-_:b317
-    :restricts :variable .
+_:b391
+    :listElements ( _:b356 _:b392 ) .
+
+_:b199
+    :object _:b393 ;
+    :subject _:b198 .
+
+_:b394
+    :restricts :stringableOrVariable .
 
 math:atan
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b335
-    :object _:b358 ;
-    :subject _:b233 .
-
-_:b371
-    :object _:b378 ;
-    :subject _:b379 .
-
-_:b139
-    :restricts :stringableList .
+_:b395
+    :restricts :stringableOrVariable .
 
 math:cosh
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b214
-    :restricts :dateType .
-
-_:b380
-    :object _:b381 ;
-    :subject _:b116 .
-
 _:b382
-    :oneOf ( _:b383 _:b384 ) .
+    :restricts :baseIri .
 
-_:b385
-    :object _:b162 ;
-    :subject _:b247 .
+_:b396
+    :restricts :stringableOrVariableList .
 
-_:b386
-    :restricts :concreteList .
+_:b397
+    :listElementType _:b398 .
 
-_:b291
-    :listElementType _:b387 ;
-    :size _:b388 .
+_:b399
+    :domain _:b260 .
 
-_:b389
-    :object _:b254 ;
-    :subject _:b22 .
+_:b141
+    :restricts :list .
 
-_:b272
-    :datatype xsd:dateTime .
+_:b400
+    :restricts :variable .
+
+_:b383
+    :restricts :variable .
 
 math:cos
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b27
-    :object _:b126 ;
-    :subject _:b339 .
+_:b401
+    :restricts :variable .
 
-_:b390
-    :oneOf ( _:b391 _:b119 ) .
-
-_:b392
-    :listElements ( _:b209 _:b294 _:b48 ) .
-
-_:b393
-    :restricts :dateType .
-
-_:b394
-    :object _:b73 ;
-    :subject _:b159 .
+_:b138
+    :listElementType _:b118 .
 
 math:remainder
     :inputConstraints :intIntListAndIntOrVariable ;
     a   :BuiltinDefinition .
 
-_:b349
-    :restricts :variable .
-
 string:greaterThan
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b395
-    :oneOf ( _:b211 _:b396 ) .
+_:b402
+    :object _:b395 ;
+    :subject _:b117 .
 
-_:b397
-    :object _:b352 ;
-    :subject _:b398 .
+_:b120
+    :datatype xsd:dateTime .
 
-_:b263
-    :restricts :list .
-
-_:b399
-    :restricts :numberable .
+_:b257
+    :restricts :intable .
 
 log:langlit
-    :inputConstraints _:b108 ;
+    :inputConstraints _:b191 ;
     a   :BuiltinDefinition .
-
-_:b400
-    :restricts :stringableOrVariable .
-
-_:b25
-    :restricts :stringableOrVariable .
 
 log:equalTo
     :inputConstraints :concreteAndConcreteOrVariable ;
     a   :BuiltinDefinition .
 
-_:b342
-    :restricts :concreteList .
-
-_:b387
-    :restricts :formulaOrVariable .
-
-_:b401
-    :restricts :numberableOrVariable .
+_:b268
+    :restricts :variable .
 
 math:rounded
     :inputConstraints :numberAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b402
-    :oneOf ( _:b296 _:b403 _:b68 ) .
+_:b38
+    :object _:b403 ;
+    :subject _:b338 .
+
+_:b333
+    :listElementType _:b238 .
+
+_:b387
+    :listElements ( _:b175 _:b404 _:b374 ) .
+
+_:b403
+    :restricts :boolOrVariable .
 
 list:member
     :inputConstraints :listAndAny ;
     a   :BuiltinDefinition .
 
-_:b231
-    :restricts :formula .
+_:b405
+    :object _:b369 ;
+    :subject _:b21 .
 
-_:b373
+_:b227
+    :restricts :concrete .
+
+_:b116
+    :domain _:b168 .
+
+_:b406
     :restricts :stringable .
 
-_:b292
-    :restricts :variable .
+_:b407
+    :oneOf ( _:b215 _:b401 ) .
 
-_:b124
-    :restricts :formula .
+_:b123
+    :restricts :intableOrVariable .
 
-_:b404
-    :restricts :formulaOrVariable .
-
-_:b61
-    :restricts :formulaOrVariable .
-
-_:b405
-    :restricts :variable .
-
-_:b299
-    :oneOf ( _:b406 _:b407 _:b117 ) .
+_:b408
+    :restricts :baseIri .
 
 string:concatenation
     :inputConstraints :concreteStringListAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b408
-    :restricts :list .
+_:b230
+    :restricts :variable .
+
+_:b127
+    :restricts :variable .
 
 time:minute
     :inputConstraints :timeAndIntableOrVariable ;
     a   :BuiltinDefinition .
 
-_:b8  :listElements ( _:b203 _:b42 ) .
-
-_:b133
-    :oneOf ( _:b409 _:b410 ) .
-
 _:b409
-    :listElementType _:b145 .
+    :domain _:b405 .
 
-_:b331
-    :restricts :stringableOrVariable .
+_:b410
+    :restricts :intableOrVariable .
 
 _:b411
-    :object _:b326 ;
-    :subject _:b412 .
+    a   :Exact ;
+    rdf:value "2"^^xsd:int .
 
-_:b36
-    :object _:b41 ;
-    :subject _:b413 .
-
-_:b414
+_:b235
     :restricts :variable .
-
-_:b415
-    :datatype xsd:dateTime .
 
 math:greaterThan
     :inputConstraints :concreteNumbers ;
     a   :BuiltinDefinition .
+
+_:b58
+    :restricts :dateOrTime .
 
 string:notEqualIgnoringCase
     :inputConstraints :stringAndString ;
@@ -1491,31 +1459,28 @@ math:sum
     :inputConstraints :concreteNumberListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b327
-    :domain _:b109 .
+_:b412
+    :oneOf ( _:b413 _:b414 ) .
+
+_:b415
+    :restricts :variable .
+
+_:b416
+    :restricts :variable .
+
+_:b417
+    :oneOf ( _:b157 _:b415 ) .
 
 math:acos
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b295
-    :object _:b400 ;
-    :subject _:b191 .
-
-_:b46
-    :object _:b88 ;
-    :subject _:b152 .
-
-_:b388
-    a   :Exact ;
-    rdf:value "2"^^xsd:int .
-
-_:b201
-    :domain _:b303 .
+_:b418
+    :oneOf ( _:b341 _:b419 ) .
 
 :stringAndString
     a   :InputConstraintsDefinition ;
-    :domain _:b416 .
+    :domain _:b420 .
 
 math:max
     :inputConstraints :concreteNumberListAndNumberOrVariable ;
@@ -1524,90 +1489,73 @@ math:max
 :NumberableInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b173
-    :restricts :variable .
-
-_:b417
-    :object _:b418 ;
-    :subject _:b415 .
-
-_:b369
-    :restricts :concreteList .
-
-_:b357
-    :restricts :intableOrVariable .
-
-_:b381
-    :restricts :concrete .
-
-_:b383
-    :listElements ( _:b419 _:b18 ) .
-
-_:b420
-    :restricts :stringableOrVariable .
-
-_:b45
-    :object _:b220 ;
-    :subject _:b372 .
-
-list:remove
-    :inputConstraints _:b169 ;
-    a   :BuiltinDefinition .
-
-_:b268
-    :restricts :variable .
-
 _:b421
-    :oneOf ( _:b197 _:b72 ) .
+    :object _:b314 ;
+    :subject _:b391 .
 
-list:unique
-    :inputConstraints _:b422 ;
-    a   :BuiltinDefinition .
+_:b379
+    :restricts :variable .
 
-_:b75
-    :object _:b423 ;
-    :subject _:b386 .
+_:b422
+    :restricts :formula .
 
-_:b362
+_:b126
+    :listElements ( _:b394 _:b423 ) .
+
+_:b43
     :restricts :any .
 
-list:append
+list:remove
     :inputConstraints _:b424 ;
     a   :BuiltinDefinition .
 
-_:b107
-    :restricts :listOrVariable .
+_:b100
+    :restricts :stringable .
+
+_:b425
+    :object _:b426 ;
+    :subject _:b377 .
+
+list:unique
+    :inputConstraints _:b427 ;
+    a   :BuiltinDefinition .
+
+_:b347
+    :restricts :concreteList .
+
+_:b104
+    :domain _:b95 .
+
+list:append
+    :inputConstraints _:b428 ;
+    a   :BuiltinDefinition .
+
+_:b429
+    :restricts :stringableOrVariable .
 
 :list
     a   :ListInputConstraint .
-
-_:b90
-    :restricts :concreteList .
 
 :listOrVariable
     :oneOf ( :list :variable ) .
 
 :concreteNumbers
     a   :InputConstraintsDefinition ;
-    :domain _:b425 .
+    :domain _:b430 .
 
-_:b91
-    :restricts :variable .
+_:b431
+    :restricts :list .
 
-_:b426
-    :restricts :stringable .
+_:b432
+    :object _:b66 ;
+    :subject _:b416 .
 
-_:b238
-    :restricts :numberableList .
+_:b433
+    :listElements ( _:b400 _:b434 _:b435 ) .
 
-_:b377
-    :restricts :variable .
-
-_:b427
-    :listElements ( _:b420 _:b23 ) .
-
-_:b407
-    :restricts :formula .
+_:b436
+    :object _:b390 ;
+    :subject _:b358 .
 
 :regexOrVariable
     :oneOf ( :regex :variable ) .
@@ -1615,27 +1563,34 @@ _:b407
 :formula
     a   :FormulaInputConstraint .
 
-_:b428
+_:b437
     :restricts :variable .
 
-_:b416
-    :object _:b17 ;
-    :subject _:b426 .
+_:b368
+    :oneOf ( _:b144 _:b432 ) .
 
-_:b259
-    :datatype xsd:dateTime .
+_:b248
+    :object _:b339 ;
+    :subject _:b362 .
 
-_:b93
-    :restricts :listOrVariable .
+_:b438
+    :restricts :boolOrVariable .
 
-_:b2  :restricts :dateOrTime .
+_:b291
+    :listElements ( _:b210 _:b439 ) .
+
+_:b46
+    :restricts :numberableOrVariable .
 
 :iriAndStringOrVariable
     a   :InputConstraints ;
-    :domain _:b429 .
+    :domain _:b402 .
 
-_:b267
-    :listElements ( _:b351 _:b430 ) .
+_:b59
+    :restricts :variable .
+
+_:b392
+    :restricts :concrete .
 
 math:ceiling
     :inputConstraints :numberAndNumberOrVariable ;
@@ -1644,83 +1599,73 @@ math:ceiling
 :iriOrVariable
     :oneOf ( :iri :variable ) .
 
-_:b423
-    :restricts :any .
+_:b440
+    :restricts :variable .
 
-_:b376
-    :restricts :stringable .
+_:b441
+    :restricts :regexOrVariable .
 
-_:b121
-    :object _:b269 ;
-    :subject _:b431 .
+_:b6  :object _:b442 ;
+    :subject _:b307 .
+
+_:b375
+    :restricts :concrete .
 
 :numberable
     a   :NumberableInputConstraint .
-
-_:b432
-    :oneOf ( _:b417 _:b433 ) .
-
-_:b433
-    :object _:b434 ;
-    :subject _:b414 .
 
 time:year
     :inputConstraints :dateAndIntableOrVariable ;
     a   :BuiltinDefinition .
 
-_:b12
-    :object _:b35 ;
-    :subject _:b241 .
+_:b72
+    :object _:b381 ;
+    :subject _:b433 .
 
-_:b361
+_:b443
     :restricts :numberableOrVariable .
+
+_:b275
+    :restricts :intableOrVariable .
 
 log:prefix
     :inputConstraints :stringOrVariableAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b435
-    :restricts :variable .
-
-_:b436
-    :oneOf ( _:b131 _:b437 ) .
-
-_:b136
-    :restricts :stringableOrVariable .
+_:b97
+    :restricts :iri .
 
 :stringOrVariableAndStringOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b438 .
-
-_:b153
-    :restricts :variable .
-
-_:b198
-    :domain _:b439 .
-
-_:b332
-    :restricts :regexOrVariable .
+    :domain _:b84 .
 
 :concreteListAndConcrete
     a   :InputConstraints ;
-    :domain _:b440 .
+    :domain _:b444 .
 
 log:conjunction
-    :inputConstraints _:b129 ;
+    :inputConstraints _:b409 ;
     a   :BuiltinDefinition .
 
-_:b441
+_:b77
     :restricts :variable .
 
-_:b78
-    :oneOf ( _:b33 _:b368 _:b324 ) .
+_:b329
+    :restricts :formula .
 
-_:b442
-    :restricts :numberable .
+_:b445
+    :object _:b64 ;
+    :subject _:b446 .
+
+_:b447
+    :oneOf ( _:b408 _:b448 _:b147 ) .
 
 string:capitalize
     :inputConstraints :stringAndStringOrVariable ;
     a   :BuiltinDefinition .
+
+_:b309
+    :oneOf ( _:b112 _:b422 _:b440 ) .
 
 math:tanh
     :inputConstraints :numberOrVariable ;
@@ -1730,265 +1675,333 @@ math:tanh
     a   :ListInputConstraint ;
     :listElementType :numberable .
 
-_:b110
-    :oneOf ( _:b86 _:b297 ) .
-
-_:b391
-    :restricts :stringableOrVariableList .
-
-_:b314
+_:b449
     :restricts :formula .
-
-_:b264
-    :domain _:b298 .
 
 math:acosh
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b396
-    :restricts :variable .
+_:b450
+    :object _:b313 ;
+    :subject _:b451 .
 
-_:b398
-    :listElements ( _:b97 _:b277 _:b354 ) .
-
-_:b412
-    :listElements ( _:b443 _:b71 ) .
-
-_:b288
-    :object _:b158 ;
-    :subject _:b405 .
+_:b423
+    :restricts :regexOrVariable .
 
 log:localName
     :inputConstraints :iriAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b444
-    :restricts :variable .
+_:b297
+    :object _:b346 ;
+    :subject _:b452 .
 
-_:b384
-    :restricts :variable .
+_:b435
+    :restricts :listOrVariable .
 
-_:b379
-    :restricts :iri .
+_:b453
+    :object _:b61 ;
+    :subject _:b80 .
+
+_:b454
+    :object _:b455 ;
+    :subject _:b412 .
 
 math:equalTo
     :inputConstraints :concreteNumbers ;
     a   :BuiltinDefinition .
 
-_:b431
-    :listElements ( _:b330 _:b157 ) .
+_:b348
+    :restricts :variable .
 
-_:b425
-    :object _:b442 ;
-    :subject _:b399 .
+_:b413
+    :restricts :formula .
 
-_:b3  :restricts :variable .
-
-_:b445
-    :oneOf ( _:b161 _:b49 _:b441 ) .
-
-_:b446
-    :oneOf ( _:b260 _:b444 ) .
-
-_:b447
-    :listElementType _:b177 ;
-    :size _:b448 .
+_:b456
+    :oneOf ( _:b236 _:b63 ) .
 
 time:timeZone
     :inputConstraints :dateOrTimeAndIntableOrVariable ;
     a   :BuiltinDefinition .
 
-_:b118
-    :domain _:b341 .
+_:b212
+    :restricts :listOrVariable .
 
-_:b355
-    :domain _:b385 .
+_:b49
+    :object _:b429 ;
+    :subject _:b370 .
 
-_:b167
-    :restricts :stringableOrVariable .
+_:b133
+    :restricts :dateType .
+
+_:b442
+    :restricts :formula .
+
+_:b414
+    :restricts :baseIri .
 
 :formulaOrBaseAndFormula
     a   :InputConstraintsDefinition ;
-    :domain _:b77 .
+    :domain _:b454 .
 
 :dateOrTime
-    :oneOf ( _:b227 _:b229 _:b449 ) .
+    :oneOf ( _:b301 _:b385 _:b457 ) .
 
-_:b449
-    :datatype xsd:time .
+_:b272
+    :listElements ( _:b410 _:b320 ) .
 
-_:b347
-    :restricts :baseIri .
-
-_:b450
-    :oneOf ( _:b427 _:b306 ) .
+_:b458
+    :oneOf ( _:b459 _:b103 ) .
 
 :concreteList
     a   :ListInputConstraint ;
     :listElementType :concrete .
 
-_:b7  :restricts :literal .
-
-_:b174
-    :domain _:b80 .
-
-_:b183
-    :restricts :string .
-
 _:b419
-    :restricts :stringableOrVariable .
+    :restricts :variable .
 
-_:b451
-    :restricts :intableOrVariable .
+_:b101
+    :domain _:b105 .
+
+_:b51
+    :listElements ( _:b86 _:b89 ) .
+
+_:b344
+    :object _:b460 ;
+    :subject _:b461 .
+
+_:b264
+    :restricts :variable .
+
+_:b281
+    :restricts :literal .
+
+_:b460
+    :restricts :literal .
+
+_:b430
+    :object _:b462 ;
+    :subject _:b188 .
+
+_:b463
+    :restricts :variable .
 
 list:first
     :inputConstraints :listAndAny ;
     a   :BuiltinDefinition .
 
+_:b24
+    :object _:b218 ;
+    :subject _:b336 .
+
+_:b464
+    :oneOf ( _:b253 _:b352 _:b161 ) .
+
+_:b455
+    :oneOf ( _:b449 _:b437 _:b316 ) .
+
+_:b115
+    :object _:b328 ;
+    :subject _:b331 .
+
+_:b461
+    :restricts :variable .
+
+_:b18
+    :restricts :formula .
+
 string:matches
     :inputConstraints :stringAndRegex ;
     a   :BuiltinDefinition .
 
-_:b113
-    :restricts :numberableOrVariableList .
+_:b459
+    :listElements ( :intableOrVariable :intableOrVariable ) .
 
-_:b452
-    :oneOf ( _:b447 _:b453 ) .
+_:b304
+    :restricts :stringableOrVariable .
 
-_:b454
-    :oneOf ( _:b276 _:b428 ) .
+_:b224
+    :domain _:b445 .
+
+_:b434
+    :restricts :formula .
+
+_:b145
+    :restricts :intableOrVariable .
+
+_:b167
+    a   :Exact ;
+    rdf:value "2"^^xsd:int .
+
+_:b393
+    :restricts :list .
+
+_:b332
+    :restricts :stringable .
+
+_:b317
+    :restricts :formulaOrVariable .
 
 math:asinh
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
+_:b149
+    :domain _:b152 .
+
 :stringAndStringOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b329 .
+    :domain _:b242 .
 
-_:b455
-    :object :numberableOrVariable ;
-    :subject _:b456 .
+_:b465
+    :restricts :numberableOrVariable .
 
-_:b434
-    :restricts :intable .
+_:b351
+    :restricts :list .
 
-_:b457
-    :domain _:b397 .
-
-_:b438
-    :oneOf ( _:b458 _:b141 ) .
-
-_:b378
+_:b299
     :restricts :formulaOrVariable .
 
-_:b459
-    :restricts :any .
+_:b285
+    :domain _:b386 .
+
+_:b363
+    :restricts :variable .
+
+_:b213
+    :listElements ( _:b406 _:b181 ) .
+
+_:b311
+    :listElements ( :intable :intable ) .
 
 :regex
     a   :RegexInputConstraint .
 
-_:b223
-    :restricts :formula .
+_:b234
+    :restricts :dateType .
 
-_:b11
-    :object _:b401 ;
-    :subject _:b307 .
+_:b372
+    :restricts :numberable .
 
 :intIntListAndIntOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b63 .
+    :domain _:b310 .
+
+_:b201
+    :restricts :stringableOrVariable .
 
 :BaseInputConstraint
     rdfs:subClassOf :InputConstraint .
 
-_:b212
-    :restricts :listOrVariable .
-
 :StringInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
+
+_:b452
+    :listElements ( _:b151 _:b303 _:b250 ) .
 
 log:label
     :inputConstraints :bnodeAndStringOrVariable ;
     a   :BuiltinDefinition .
 
 log:forAllIn
-    :inputConstraints _:b336 ;
+    :inputConstraints _:b364 ;
     a   :BuiltinDefinition .
 
-_:b194
-    :restricts :intableOrVariable .
-
-_:b156
-    :domain _:b286 .
-
-_:b460
-    :restricts :stringOrVariable .
-
-_:b456
-    :listElements ( :numberable :intable ) .
-
-_:b461
+_:b289
     :restricts :variable .
 
-_:b150
-    :restricts :stringable .
+_:b91
+    :object _:b438 ;
+    :subject _:b223 .
+
+_:b106
+    :restricts :intableOrVariable .
+
+_:b30
+    :datatype xsd:boolean .
+
+_:b462
+    :restricts :numberable .
+
+_:b237
+    :object _:b182 ;
+    :subject _:b204 .
+
+_:b300
+    :restricts :listOrVariable .
+
+_:b243
+    :restricts :stringableOrVariable .
+
+_:b229
+    :listElementType _:b466 .
+
+_:b288
+    :datatype xsd:dateTime .
 
 _:b439
-    :object _:b184 ;
-    :subject _:b459 .
+    :restricts :iri .
 
-_:b289
-    :object _:b32 ;
-    :subject _:b374 .
+_:b361
+    :listElements ( _:b335 _:b441 ) .
+
+_:b202
+    :restricts :intableOrVariable .
+
+_:b306
+    :restricts :intableOrVariable .
+
+_:b294
+    :restricts :list .
 
 :concreteAndConcrete
     a   :InputConstraintsDefinition ;
-    :domain _:b380 .
+    :domain _:b226 .
+
+_:b420
+    :object _:b467 ;
+    :subject _:b323 .
+
+_:b359
+    :object _:b60 ;
+    :subject _:b150 .
 
 string:join
-    :inputConstraints _:b239 ;
+    :inputConstraints _:b399 ;
     a   :BuiltinDefinition .
-
-_:b462
-    :restricts :concreteList .
-
-_:b196
-    :restricts :dateOrTime .
-
-_:b463
-    :restricts :concreteList .
-
-_:b261
-    :restricts :stringableOrVariable .
 
 :timeAndIntableOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b389 .
+    :domain _:b251 .
 
-_:b130
-    :object _:b210 ;
-    :subject _:b308 .
+_:b286
+    :domain _:b211 .
 
-_:b240
-    :object _:b460 ;
-    :subject _:b138 .
+_:b371
+    :restricts :numberableOrVariable .
 
-_:b219
-    :domain _:b163 .
+_:b146
+    :datatype xsd:dateTime .
 
-_:b453
-    :restricts :variable .
+_:b467
+    :restricts :stringable .
 
-_:b322
-    :restricts :regex .
+_:b69
+    :restricts :iri .
+
+_:b173
+    :listElementType _:b36 ;
+    :size _:b259 .
 
 :bnode
     a   :BnodeInputConstraint .
 
-_:b111
-    :restricts :list .
+_:b404
+    :restricts :intable .
+
+_:b468
+    :restricts :stringable .
 
 string:startsWith
     :inputConstraints :stringAndString ;
@@ -1997,27 +2010,29 @@ string:startsWith
 :string
     a   :StringInputConstraint .
 
+_:b110
+    :restricts :variable .
+
+_:b469
+    :oneOf ( _:b327 _:b463 ) .
+
+_:b206
+    :restricts :variable .
+
 math:atanh
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
-
-_:b464
-    :oneOf ( _:b392 _:b217 ) .
 
 math:exponentiation
     :inputConstraints :twoNumberListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b465
-    :oneOf ( _:b242 _:b435 ) .
-
 list:notMember
     :inputConstraints :concreteListAndConcrete ;
     a   :BuiltinDefinition .
 
-_:b82
-    :object _:b50 ;
-    :subject _:b334 .
+_:b129
+    :restricts :literalOrVariable .
 
 file:listFiles
     :inputConstraints :iriAndFormula ;
@@ -2025,23 +2040,33 @@ file:listFiles
         "true"^^xsd:boolean ;
     a   :BuiltinDefinition .
 
-_:b16
-    :domain _:b360 .
+_:b451
+    :restricts :concrete .
 
 math:sin
     :inputConstraints :numberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b365
-    :restricts :variable .
+_:b389
+    :domain _:b425 .
 
 :numberIntListAndNumberOrVariable
     a   :InputConstraintsDefinition ;
-    :domain _:b455 .
+    :domain _:b283 .
 
-_:b440
-    :object _:b127 ;
-    :subject _:b462 .
+_:b398
+    :restricts :stringableOrVariable .
+
+_:b470
+    :oneOf ( _:b396 _:b343 ) .
+
+_:b353
+    :object _:b271 ;
+    :subject _:b431 .
+
+_:b208
+    :object _:b465 ;
+    :subject _:b203 .
 
 log:semantics
     :inputConstraints :iriAndFormula ;
@@ -2049,37 +2074,41 @@ log:semantics
         "true"^^xsd:boolean ;
     a   :BuiltinDefinition .
 
-_:b375
-    :domain _:b411 .
+_:b154
+    :object _:b113 ;
+    :subject _:b219 .
 
-_:b244
-    :restricts :intableOrVariable .
+_:b444
+    :object _:b205 ;
+    :subject _:b214 .
 
-_:b257
-    :object _:b14 ;
-    :subject _:b96 .
+_:b330
+    :restricts :literal .
 
-_:b418
-    :restricts :intableOrVariable .
-
-_:b466
-    :oneOf ( _:b393 _:b250 ) .
-
-_:b406
+_:b380
     :restricts :baseIri .
 
-_:b410
+_:b225
+    :domain _:b265 .
+
+_:b164
+    :restricts :bnode .
+
+_:b172
+    :restricts :formulaOrVariable .
+
+_:b195
     :restricts :variable .
 
-_:b302
-    :restricts :variable .
+_:b457
+    :datatype xsd:time .
 
-_:b284
-    :domain _:b432 .
+_:b155
+    :domain _:b246 .
 
-_:b337
-    :object _:b346 ;
-    :subject _:b83 .
+_:b471
+    a   :Exact ;
+    rdf:value "2"^^xsd:int .
 
 log:outputString
     :inputConstraints :stringAndString ;
@@ -2087,100 +2116,81 @@ log:outputString
     :isStatic "false"^^xsd:boolean ;
     :instantiate "false"^^xsd:boolean .
 
-_:b253
-    :listElements ( _:b350 _:b321 _:b225 ) .
+_:b132
+    :restricts :intableOrVariable .
 
-_:b137
-    :restricts :stringableOrVariable .
+_:b446
+    :restricts :stringable .
 
-_:b340
-    :domain _:b312 .
+_:b354
+    :domain _:b436 .
 
-_:b101
-    :domain _:b394 .
+_:b367
+    :object _:b345 ;
+    :subject _:b443 .
 
 :VariableInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b443
-    :restricts :stringable .
+_:b318
+    :restricts :formula .
 
-_:b170
-    :object _:b30 ;
-    :subject _:b146 .
+_:b428
+    :domain _:b92 .
+
+_:b448
+    :restricts :formula .
+
+_:b241
+    :object _:b376 ;
+    :subject _:b156 .
 
 list:removeAt
-    :inputConstraints _:b310 ;
+    :inputConstraints _:b340 ;
     a   :BuiltinDefinition .
 
-_:b274
-    :object _:b404 ;
-    :subject _:b370 .
+_:b85
+    :object _:b315 ;
+    :subject _:b87 .
 
-_:b180
-    :restricts :numberableOrVariable .
+_:b124
+    :restricts :dateOrTime .
 
-_:b20
-    :datatype xsd:dateTime .
+_:b185
+    :listElementType _:b357 ;
+    :size _:b471 .
 
-_:b134
-    :oneOf ( _:b166 _:b328 ) .
+_:b342
+    :restricts :iriOrVariable .
 
-_:b467
-    :oneOf ( _:b463 _:b461 ) .
-
-_:b429
-    :object _:b338 ;
-    :subject _:b468 .
-
-_:b469
-    :oneOf ( _:b356 _:b29 ) .
+_:b426
+    :restricts :stringableOrVariable .
 
 :variable
     a   :VariableInputConstraint .
 
-_:b367
-    :restricts :variable .
-
-_:b448
-    a   :Exact ;
-    rdf:value "2"^^xsd:int .
-
-_:b304
-    :restricts :stringable .
-
-_:b470
-    :oneOf ( _:b282 _:b202 ) .
-
-_:b403
-    :restricts :literal .
+_:b130
+    :listElements ( _:b55 _:b468 ) .
 
 :StringableInputConstraint
     rdfs:subClassOf :BaseInputConstraint .
 
-_:b430
-    :restricts :any .
-
-_:b471
-    :object _:b451 ;
-    :subject _:b305 .
+_:b47
+    :listElementType _:b187 ;
+    :size _:b411 .
 
 _:b424
-    :domain _:b65 .
+    :domain _:b421 .
+
+_:b284
+    :listElements ( :numberable :intable ) .
 
 log:notIncludes
     :inputConstraints :formulaOrBaseAndFormula ;
     a   :BuiltinDefinition .
 
-_:b348
-    :restricts :formula .
-
-_:b458
-    :object _:b344 ;
-    :subject _:b168 .
-
-_:b468
-    :restricts :iri .
+_:b365
+    :restricts :regexOrVariable .
 
 :any  a   :AnyInputConstraint .
 
@@ -2188,46 +2198,36 @@ string:equalIgnoringCase
     :inputConstraints :stringAndString ;
     a   :BuiltinDefinition .
 
-_:b265
-    :object _:b208 ;
-    :subject _:b408 .
+_:b427
+    :domain _:b53 .
 
-_:b413
-    :restricts :stringableList .
+_:b217
+    :oneOf ( _:b397 _:b222 ) .
+
+_:b256
+    :restricts :list .
 
 math:logarithm
     :inputConstraints :twoNumberListAndNumberOrVariable ;
     a   :BuiltinDefinition .
 
-_:b437
-    :restricts :variable .
-
-_:b98
-    :domain _:b471 .
-
-_:b422
-    :domain _:b37 .
-
 string:replace
-    :inputConstraints _:b457 ;
+    :inputConstraints _:b296 ;
     a   :BuiltinDefinition .
-
-_:b144
-    :restricts :variable .
 
 string:upperCase
     :inputConstraints :stringAndStringOrVariable ;
     a   :BuiltinDefinition .
 
-_:b105
-    :restricts :variable .
+_:b274
+    :oneOf ( _:b450 _:b453 ) .
+
+_:b388
+    :restricts :stringableOrVariable .
 
 log:conclusion
     :inputConstraints :formulaAndFormulaOrVariable ;
     a   :BuiltinDefinition .
 
-_:b62
-    :domain _:b251 .
-
-_:b106
-    :restricts :formula .
+_:b466
+    :restricts :regexOrVariable .

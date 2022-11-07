@@ -158,7 +158,7 @@ public class GenBuiltinDoc {
 		m.read(new FileInputStream(outFolder + "builtins_domains.n3"), "");
 		m.read(new FileInputStream(genSchemaPath), "");
 
-//		m.write(System.out);
+		m.write(System.out);
 
 		N3Model out = ModelFactory.createN3Model(N3ModelSpec.get(N3_MEM));
 
@@ -246,10 +246,10 @@ public class GenBuiltinDoc {
 		String html = m.listStatements(null, m.createResource(NS.toUri("builtin:out")), (Resource) null).next()
 				.getObject().asLiteral().getLexicalForm();
 
-		Set<Resource> builtins = new HashSet<>(); 
+		Set<Resource> builtins = new HashSet<>();
 		m.listStatements(null, m.createResource(NS.toUri("builtin:builtinHtml")), (Resource) null)
 				.forEachRemaining(stmt -> {
-					
+
 					if (builtins.contains(stmt.getSubject()))
 						System.out.println("DING DONG " + stmt.getSubject().getURI());
 					builtins.add(stmt.getSubject());
