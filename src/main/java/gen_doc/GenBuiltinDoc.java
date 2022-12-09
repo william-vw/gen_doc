@@ -146,7 +146,6 @@ public class GenBuiltinDoc {
 	}
 
 	public void genSchemas() throws IOException {
-
 		System.out.println("generating schemas...");
 
 		long start = System.currentTimeMillis();
@@ -158,7 +157,7 @@ public class GenBuiltinDoc {
 		m.read(new FileInputStream(outFolder + "builtins_domains.n3"), "");
 		m.read(new FileInputStream(genSchemaPath), "");
 
-		m.write(System.out);
+//		m.write(System.out);
 
 		N3Model out = ModelFactory.createN3Model(N3ModelSpec.get(N3_MEM));
 
@@ -240,20 +239,20 @@ public class GenBuiltinDoc {
 
 		m.read(new FileInputStream(genHtmlPath), "");
 
-		m.getDeductionsModel().write(System.out);
+//		m.getDeductionsModel().write(System.out);
 
 		String outPath = outFolder + htmlName;
 		String html = m.listStatements(null, m.createResource(NS.toUri("builtin:out")), (Resource) null).next()
 				.getObject().asLiteral().getLexicalForm();
 
-		Set<Resource> builtins = new HashSet<>();
-		m.listStatements(null, m.createResource(NS.toUri("builtin:builtinHtml")), (Resource) null)
-				.forEachRemaining(stmt -> {
-
-					if (builtins.contains(stmt.getSubject()))
-						System.out.println("DING DONG " + stmt.getSubject().getURI());
-					builtins.add(stmt.getSubject());
-				});
+//		Set<Resource> builtins = new HashSet<>();
+//		m.listStatements(null, m.createResource(NS.toUri("builtin:builtinHtml")), (Resource) null)
+//				.forEachRemaining(stmt -> {
+//
+//					if (builtins.contains(stmt.getSubject()))
+//						System.out.println("DING DONG " + stmt.getSubject().getURI());
+//					builtins.add(stmt.getSubject());
+//				});
 
 		Files.writeString(Paths.get(outPath), html);
 
